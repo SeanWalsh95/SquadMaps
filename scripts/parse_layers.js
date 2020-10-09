@@ -26,9 +26,14 @@ var layer_dict = {};
 
 for (const layer of layersJson) {
     layer_dict[layer.layerClassname] = layer;
+    var merged_layer = Object.assign({}, layer_dict[layer.layerClassname]);
+    if(layer.layerClassname in vehicle_data){
+        Object.assign(merged_layer.teamOne, layer_dict[layer.layerClassname].teamOne, vehicle_data[layer.layerClassname].teamOne);
+        Object.assign(merged_layer.teamTwo, layer_dict[layer.layerClassname].teamTwo, vehicle_data[layer.layerClassname].teamTwo);
+    }
     for (const map in maps_dict) {
         if(layer.map.match(map)){
-            maps_dict[map].push(layer);
+            maps_dict[map].push(merged_layer);
         }
     }
 }
