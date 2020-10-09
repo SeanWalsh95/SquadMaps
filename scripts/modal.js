@@ -2,6 +2,10 @@
 var modal = document.getElementById("modal_background")
 
 
+function sort_object_list(list, prop){
+	list.sort((a, b) => a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0 );
+}
+
 function view_vehicles (map)
 {
 	console.log(layer_dict[map]);
@@ -65,6 +69,7 @@ function view_vehicles (map)
 
 	var verbose_words = ['Truck','Logistics','Technical','Open Top','Transport'];
 
+	sort_object_list(layer.teamOne.vehicles, 'name');
 	layer.teamOne.vehicles.forEach(vehicle =>
 	{
 		
@@ -97,6 +102,7 @@ function view_vehicles (map)
 		team_1_ul.appendChild(li);
 	});
 
+	sort_object_list(layer.teamTwo.vehicles, 'name');
 	layer.teamTwo.vehicles.forEach(vehicle =>
 	{
 		var li = document.createElement("li");
