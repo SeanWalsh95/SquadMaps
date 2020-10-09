@@ -65,7 +65,7 @@ function view_vehicles (map)
 
 	var verbose_words = ['Truck','Logistics','Technical','Open Top','Transport'];
 
-	vehicle_data[map].teamOne.vehicles.forEach(vehicle =>
+	layer.teamOne.vehicles.forEach(vehicle =>
 	{
 		
 		var li = document.createElement("li");
@@ -97,7 +97,7 @@ function view_vehicles (map)
 		team_1_ul.appendChild(li);
 	});
 
-	vehicle_data[map].teamTwo.vehicles.forEach(vehicle =>
+	layer.teamTwo.vehicles.forEach(vehicle =>
 	{
 		var li = document.createElement("li");
 
