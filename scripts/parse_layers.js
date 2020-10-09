@@ -1,4 +1,3 @@
-
 var maps_dict = {
     "Al Basrah":[],
     "Belaya":[],
@@ -23,7 +22,10 @@ var maps_dict = {
     "Yehorivka":[]
 };
 
+var layer_dict = {};
+
 for (const layer of layersJson) {
+    layer_dict[layer.layerClassname] = layer;
     for (const map in maps_dict) {
         if(layer.map.match(map)){
             maps_dict[map].push(layer);
@@ -31,8 +33,6 @@ for (const layer of layersJson) {
     }
 }
 
-
-console.log(maps_dict);
 
 for( const [map, layers] of Object.entries(maps_dict) ){
 
