@@ -87,7 +87,7 @@ function view_vehicles (map)
 		var vehicle_img = document.createElement("img");
 		
 		if(vehicle.name in vehicle_icon_dict){
-			vehicle_img.src = `img/icons/${vehicle_icon_dict[vehicle.name]}.png`;
+			vehicle_img.src = `img/icons/map_${vehicle_icon_dict[vehicle.name]}.png`;
 		}
 
 		li.appendChild(vehicle_amount);
@@ -118,7 +118,7 @@ function view_vehicles (map)
 		var vehicle_img = document.createElement("img");
 		
 		if(vehicle.name in vehicle_icon_dict){
-			vehicle_img.src = `img/icons/${vehicle_icon_dict[vehicle.name]}.png`;
+			vehicle_img.src = `img/icons/map_${vehicle_icon_dict[vehicle.name]}.png`;
 		}
 
 		li.appendChild(vehicle_amount);
