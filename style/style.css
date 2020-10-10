@@ -2,6 +2,44 @@ body
 {
 	background-color: #010101;
 }
+.map
+{
+	z-index: 1;
+}
+.flag1{
+    text-align: left;
+}
+.flag2{
+    text-align: right;
+}
+.flag-img{
+	width: 45%;
+}
+.flags
+{
+	position: relative;
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: -2vw;
+	padding-right: 15px;
+	padding-left: 15px;
+    z-index: 2;
+}
+.map-card-title
+{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	padding-right: 15px;
+}
+.map-layer-card
+{
+	float: left;
+	width: 16.666%;
+	text-align: center;
+}
+
 .top_links
 {
 	padding: 20px 20px 0px 0px;
@@ -67,14 +105,7 @@ section h2
 	font: normal normal 700 3em "Roboto Condensed", sans-serif;
 	margin-bottom: 10px;
 }
-section div
-{
-	float: left;
-	width: 16.666%;
-	text-align: center;
-	padding-bottom: 20px;
-}
-section div img
+section .map-img
 {
 	width: 95%;
 	height: auto;
@@ -117,7 +148,7 @@ section div h3
 {
 	display: none;
 	position: fixed;
-	z-index: 1;
+	z-index: 3;
 	left: 0;
 	top: 0;
 	width: 100%;

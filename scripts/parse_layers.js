@@ -38,6 +38,13 @@ for (const layer of layersJson) {
     }
 }
 
+function fixFac(factionStr){
+    const removeTxt = ['_AR', '_DE'];
+    for(const rmTxt of removeTxt){
+        factionStr = factionStr.replace(rmTxt,'');
+    }
+    return factionStr
+}
 
 for( const [map, layers] of Object.entries(maps_dict) ){
 
@@ -66,30 +73,53 @@ for( const [map, layers] of Object.entries(maps_dict) ){
     
     for (const layer of layers) {
         var layerDiv =  document.createElement('div');
+        layerDiv.className = 'map-layer-card';
+
+
+        var cardTitle = document.createElement('div');
+        cardTitle.className = 'map-card-title';
+        
+        var layerH3 = document.createElement('h3');
+        layerH3.textContent = `${layer.gamemode} ${layer.version}`;
+        cardTitle.appendChild(layerH3);
+
+        layerDiv.appendChild(cardTitle);
 
         var map_a =  document.createElement('a');
-        map_a.href = `img/maps/full_size/${layer.layerClassname}.jpg`;
+        map_a.className = 'map';
+        map_a.href = `javascript:view_vehicles('${layer.layerClassname}');`;
 
         var map_img =  document.createElement('img');
+        map_img.className = 'map-img';
         map_img.src = `img/maps/thumbnails/${layer.layerClassname}.jpg`;
 
         map_a.appendChild(map_img);
         layerDiv.appendChild(map_a);
         
-        var layerH3 = document.createElement('h3');
-        layerH3.textContent = `${layer.gamemode} ${layer.version}`;
-        layerDiv.appendChild(layerH3);
 
-        var vic_a =  document.createElement('a');
-        vic_a.className = "vehicles";
-        vic_a.href = `javascript:view_vehicles('${layer.layerClassname}');`;
+        var flagsDiv = document.createElement('div');
+        flagsDiv.className = 'flags';
 
-        var vic_img =  document.createElement('img');
-        vic_img.src = `img/icons/vehicles.png`;
+        var a1 = document.createElement('a');
+        a1.className = 'flag1';
+        var teamOneFlag = document.createElement('img');
+        teamOneFlag.className = 'flag-img';
+        teamOneFlag.src = `img/icons/flag_${fixFac(layer.teamOne.faction)}.png`;
+        a1.appendChild(teamOneFlag);;
+        
 
-        vic_a.appendChild(vic_img);
-        layerDiv.appendChild(vic_a);
+        var a2 = document.createElement('a');
+        a2.className = 'flag2';
+        var teamTwoFlag = document.createElement('img');
+        teamTwoFlag.className = 'flag-img';
+        teamTwoFlag.src = `img/icons/flag_${fixFac(layer.teamTwo.faction)}.png`;
+        a2.appendChild(teamTwoFlag);
 
+        flagsDiv.appendChild(a1);
+        flagsDiv.appendChild(a2);
+
+        layerDiv.appendChild(flagsDiv);
+        
         mapSection.appendChild(layerDiv);
     }
     mapContainer.appendChild(mapSection);
