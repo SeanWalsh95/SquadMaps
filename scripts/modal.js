@@ -1,6 +1,9 @@
 
 var modal = document.getElementById("modal_background")
 
+function open_map(uri){
+	window.open(uri, "_blank");
+}
 
 function sort_object_list(list, prop){
 	list.sort((a, b) => a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0 );
@@ -26,8 +29,8 @@ function view_vehicles (map)
 	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets} Tickets`;
 	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets} Tickets`;
 	
-	document.getElementById("map_link").href = "img/maps/full_size/" + map + ".jpg";
-	document.getElementById("map").style.backgroundImage = "url(img/maps/full_size/" + map + ".jpg)";
+	document.getElementById("map_link").href = `javascript:open_map("img/maps/full_size/${map}.jpg")`;
+	document.getElementById("map").style.backgroundImage = `url(img/maps/full_size/${map}.jpg)`;
 
 
 	if (layer.commander)
