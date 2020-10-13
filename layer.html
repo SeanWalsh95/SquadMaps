@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Squad Maps</title>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="img/icons/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Anton|Roboto+Condensed:300,700" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="scripts/get_layers.js"></script>
+	
+</head>
+
+<body>
+	<div id="modal_background">
+		<div class="modal_content">
+			<h2 id="layer_name"></h2>
+			<div class="full_height">
+				<div class="modal_side_panel">
+					<img class="modal_flag" id="team_1_flag" src="img/icons/flag_USA.png">
+					<h3 class="modal_team_name" id="team_1_name"></h3>
+					<h4 class="modal_team_tickets" id="team_1_tickets"></h4>
+					<ul class="modal_team_vehicles" id="team_1_vehicles">
+					</ul>
+				</div>
+				<div class="modal_center_panel">
+					<div class="modal_center_panel_top" id="map_info">
+						<div>
+							<p class="modal_label" id="label_commander">Commander: </p>
+							<p class="modal_value" id="value_commander"></p>
+						</div>
+						<div>
+							<p class="modal_label" id="label_weather">Weather: </p>
+							<p class="modal_value" id="value_weather"></p>
+						</div>
+						<div>
+							<p class="modal_label" id="label_number_of_flags"># of flags:</p>
+							<p class="modal_value" id="value_number_of_flags"></p>
+						</div>
+					</div>
+					<a id="map_link" href="">
+						<div class="modal_center_panel_bottom" id="map"></div>
+					</a>
+				</div>
+				<div class="modal_side_panel">
+					<img class="modal_flag" id="team_2_flag" src="img/icons/flag_USA.png">
+					<h3 class="modal_team_name" id="team_2_name"></h3>
+					<h4 class="modal_team_tickets" id="team_2_tickets"></h4>
+					<ul class="modal_team_vehicles" id="team_2_vehicles">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="scripts/vehicle_data.js"></script>
+	<script src="scripts/parse_layers.js"></script>
+	<script src="scripts/modal.js"></script>
+	<script src="scripts/layer.js"></script>
+</body>
+
+</html>
