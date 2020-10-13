@@ -29,7 +29,9 @@ function view_vehicles (map)
 	var team_1_ul = document.getElementById("team_1_vehicles");
 	var team_2_ul = document.getElementById("team_2_vehicles");
 
-	document.getElementById("layer_name").innerHTML = layer.layer.replaceAll('_',' ');
+	if( document.getElementById("layer_name") ){
+		document.getElementById("layer_name").innerHTML = layer.layer.replaceAll('_',' ');
+	}
 
 	document.getElementById("team_1_name").innerHTML = fixFac(layer.teamOne.faction);
 	document.getElementById("team_2_name").innerHTML = fixFac(layer.teamTwo.faction);

@@ -222,12 +222,12 @@ section div h3
 .modal_label
 {
 	display: inline;
-	font: normal normal 700 1em "Roboto Condensed", sans-serif;
+	font: normal normal 700 1.25em "Roboto Condensed", sans-serif;
 }
 .modal_value
 {
 	display: inline;
-	font: normal normal 300 1em "Roboto Condensed", sans-serif;
+	font: normal normal 300 1.5em "Roboto Condensed", sans-serif;
 }
 .modal_center_panel_bottom
 {

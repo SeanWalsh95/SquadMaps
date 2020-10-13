@@ -16,7 +16,6 @@
 <body>
 	<div id="modal_background">
 		<div class="modal_content">
-			<h2 id="layer_name"></h2>
 			<div class="full_height">
 				<div class="modal_side_panel">
 					<img class="modal_flag" id="team_1_flag" src="img/icons/flag_USA.png">
@@ -58,6 +57,9 @@
 	<script src="scripts/parse_layers.js"></script>
 	<script src="scripts/modal.js"></script>
 	<script>
+        document.querySelector('.modal_content').style.width = "99%";
+        document.querySelector('.modal_content').style.height = "99%";
+
         var searchParams = new URLSearchParams(document.location.search);
 
         if(searchParams.has('map')){
