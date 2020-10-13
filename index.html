@@ -74,6 +74,26 @@
 	<script src="scripts/vehicle_data.js"></script>
 	<script src="scripts/parse_layers.js"></script>
 	<script src="scripts/modal.js"></script>
+
+	<script>
+		window.onclick = function (event)
+		{
+			if (event.target == modal)
+			{
+				var body = document.getElementsByTagName("BODY")[0];
+				body.style.overflow = "auto";
+
+				modal.style.display = "none";
+
+				var team_1_ul = document.getElementById("team_1_vehicles");
+				var team_2_ul = document.getElementById("team_2_vehicles");
+
+				team_1_ul.innerHTML = "";
+				team_2_ul.innerHTML = "";
+			}
+		}
+	</script>
+
 </body>
 
 </html>

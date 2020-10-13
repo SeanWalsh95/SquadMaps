@@ -21,10 +21,10 @@ function view_vehicles (map)
 	var team_1_ul = document.getElementById("team_1_vehicles");
 	var team_2_ul = document.getElementById("team_2_vehicles");
 
-	document.getElementById("layer_name").innerHTML = layer.layer;
+	document.getElementById("layer_name").innerHTML = layer.layer.replaceAll('_',' ');
 
-	document.getElementById("team_1_name").innerHTML = layer.teamOne.faction;
-	document.getElementById("team_2_name").innerHTML = layer.teamTwo.faction;
+	document.getElementById("team_1_name").innerHTML = layer.teamOne.faction.split('_')[0];
+	document.getElementById("team_2_name").innerHTML = layer.teamTwo.faction.split('_')[0];
 
 	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets} Tickets`;
 	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets} Tickets`;
@@ -115,21 +115,3 @@ function view_vehicles (map)
 
 	modal.style.display = "block";
 }
-
-window.onclick = function (event)
-{
-	if (event.target == modal)
-	{
-		var body = document.getElementsByTagName("BODY")[0];
-		body.style.overflow = "auto";
-
-		modal.style.display = "none";
-
-		var team_1_ul = document.getElementById("team_1_vehicles");
-		var team_2_ul = document.getElementById("team_2_vehicles");
-
-		team_1_ul.innerHTML = "";
-		team_2_ul.innerHTML = "";
-	}
-}
-

@@ -16,7 +16,8 @@
  *              "pool": int,
  *              "ammo": boolean,
  *              "build": boolean,
- *          }
+ *          },
+ *          "wiki_link": url
  *      },
  *    ...
  *  }

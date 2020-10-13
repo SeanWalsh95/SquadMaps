@@ -57,7 +57,14 @@
 	<script src="scripts/vehicle_data.js"></script>
 	<script src="scripts/parse_layers.js"></script>
 	<script src="scripts/modal.js"></script>
-	<script src="scripts/layer.js"></script>
+	<script>
+        var searchParams = new URLSearchParams(document.location.search);
+
+        if(searchParams.has('map')){
+            var map = searchParams.get('map');
+            view_vehicles(map);
+        }
+    </script>
 </body>
 
 </html>
