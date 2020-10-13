@@ -8,8 +8,8 @@ function open_map(uri){
 //sort by delay and name
 function sort_vehicles_list(list){
 	list.sort(function(a, b) {
-		var a_str = (a.delay ? a.delay : 0+"").padStart(5, '0') + a.name;
-		var b_str = (b.delay ? b.delay : 0+"").padStart(5, '0') + b.name;
+		var a_str = (a.delay ? a.delay : 0)+"".padStart(5, '0') + a.name;
+		var b_str = (b.delay ? b.delay : 0)+"".padStart(5, '0') + b.name;
 
 		if( a_str < b_str ){ return -1; }
 		if( a_str > b_str ){ return 1; }
