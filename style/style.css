@@ -114,9 +114,9 @@ section div h3
 {
 	color: #FFFFFF;
 	font: normal normal 700 1.5em "Roboto Condensed", sans-serif;
-	padding: 4px 0px 0px 15px;
+	padding: 4px 0px 0px 10px;
 	float: left;
-	width: 80%;
+	width: 100%;
 	text-align: left;
 	box-sizing: border-box;
 	white-space: nowrap;
@@ -290,7 +290,7 @@ section div h3
 {
 	display: inline-block;
 	color: #FFFFFF;
-	font: normal normal 300 1.5em "Roboto Condensed", sans-serif;
+	font: normal normal 500 1.25em "Roboto Condensed", sans-serif;
 	padding-left: 5px;
 }
 .modal_content li small
