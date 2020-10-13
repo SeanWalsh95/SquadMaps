@@ -33,3 +33,5 @@ if __name__ == '__main__':
         url = "file:///{}?map={}".format(os.path.abspath('../layer.html'), layer['layerClassname'])
         path = '../img/screens/{}.png'.format(layer['layerClassname'])
         chrome.take_screenshot(url, path)
+
+    chrome.driver.close()
