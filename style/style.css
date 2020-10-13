@@ -227,7 +227,7 @@ section div h3
 .modal_value
 {
 	display: inline;
-	font: normal normal 300 1.5em "Roboto Condensed", sans-serif;
+	font: normal normal 300 1em "Roboto Condensed", sans-serif;
 }
 .modal_center_panel_bottom
 {
@@ -297,6 +297,6 @@ section div h3
 {
 	color: #FFFFFF;
 	font: normal normal 300 0.8em "Roboto Condensed", sans-serif;
-	padding-left: 10px;
+	padding-left: 40px;
 }
 

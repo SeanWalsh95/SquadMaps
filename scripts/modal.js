@@ -5,8 +5,16 @@ function open_map(uri){
 	window.open(uri, "_blank");
 }
 
-function sort_object_list(list, prop){
-	list.sort((a, b) => a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0 );
+//sort by delay and name
+function sort_vehicles_list(list){
+	list.sort(function(a, b) {
+		var a_str = (a.delay ? a.delay : 0+"").padStart(5, '0') + a.name;
+		var b_str = (b.delay ? b.delay : 0+"").padStart(5, '0') + b.name;
+
+		if( a_str < b_str ){ return -1; }
+		if( a_str > b_str ){ return 1; }
+		return 0;
+	})
 }
 
 function view_vehicles (map)
@@ -48,7 +56,7 @@ function view_vehicles (map)
 
 	var verbose_words = ['Truck','Logistics','Technical','Open Top','Transport'];
 
-	sort_object_list(layer.teamOne.vehicles, 'name');
+	sort_vehicles_list(layer.teamOne.vehicles, 'name');
 	layer.teamOne.vehicles.forEach(vehicle =>
 	{
 		
@@ -63,7 +71,7 @@ function view_vehicles (map)
 		vehicle_name.innerHTML = short_name.trim();
 
 		var delay = "";
-		if(vehicle.delay){ delay = vehicle.delay / 60 + " mins"; }
+		if(vehicle.delay){ delay =  "Delayed " + vehicle.delay / 60 + " mins"; }
 
 		var vehicle_delay = document.createElement("small");
 		vehicle_delay.innerHTML = delay;
@@ -77,11 +85,14 @@ function view_vehicles (map)
 		li.appendChild(vehicle_amount);
 		li.appendChild(vehicle_img);
 		li.appendChild(vehicle_name);
-		li.appendChild(vehicle_delay);
+		if(vehicle.delay){ 
+			li.appendChild(document.createElement('br'));
+			li.appendChild(vehicle_delay);
+		}
 		team_1_ul.appendChild(li);
 	});
 
-	sort_object_list(layer.teamTwo.vehicles, 'name');
+	sort_vehicles_list(layer.teamTwo.vehicles, 'name');
 	layer.teamTwo.vehicles.forEach(vehicle =>
 	{
 		var li = document.createElement("li");
@@ -95,7 +106,7 @@ function view_vehicles (map)
 		vehicle_name.innerHTML = short_name.trim();
 
 		var delay = "";
-		if(vehicle.delay){ delay = vehicle.delay / 60 + " mins"; }
+		if(vehicle.delay){ delay =  "Delayed " + vehicle.delay / 60 + " mins"; }
 
 		var vehicle_delay = document.createElement("small");
 		vehicle_delay.innerHTML = delay;
@@ -109,7 +120,11 @@ function view_vehicles (map)
 		li.appendChild(vehicle_amount);
 		li.appendChild(vehicle_img);
 		li.appendChild(vehicle_name);
-		li.appendChild(vehicle_delay);
+		if(vehicle.delay){ 
+			li.appendChild(document.createElement('br'));
+			li.appendChild(vehicle_delay);
+		}
+		
 		team_2_ul.appendChild(li);
 	});
 
