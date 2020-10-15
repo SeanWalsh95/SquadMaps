@@ -23,7 +23,7 @@ function sort_vehicles_list(list){
 
 function view_vehicles (map)
 {
-	console.log(layer_dict[map]);
+	console.log( `${map}:`, layer_dict[map]);
 
 	const layer = layer_dict[map];
 
@@ -62,10 +62,10 @@ function view_vehicles (map)
 
 	var verbose_words = ['Truck','Logistics','Technical','Open Top','Transport'];
 
+	document.querySelector('#team_1_vehicles').innerHTML = "";
 	sort_vehicles_list(layer.teamOne.vehicles, 'name');
 	layer.teamOne.vehicles.forEach(vehicle =>
 	{
-		
 		var li = document.createElement("li");
 
 		var vehicle_amount = document.createElement("p");
@@ -98,6 +98,7 @@ function view_vehicles (map)
 		team_1_ul.appendChild(li);
 	});
 
+	document.querySelector('#team_2_vehicles').innerHTML = "";
 	sort_vehicles_list(layer.teamTwo.vehicles, 'name');
 	layer.teamTwo.vehicles.forEach(vehicle =>
 	{
