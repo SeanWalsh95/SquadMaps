@@ -55,7 +55,7 @@
 	</div>
 	<script src="scripts/vehicle_data.js"></script>
 	<script src="scripts/parse_layers.js"></script>
-	<script src="scripts/modal.js"></script>
+	<script src="scripts/layer_handler.js"></script>
 	<script>
         document.querySelector('.modal_content').style.width = "99%";
         document.querySelector('.modal_content').style.height = "99%";
@@ -64,7 +64,7 @@
 
         if(searchParams.has('map')){
             var map = searchParams.get('map');
-            view_vehicles(map);
+            loadLayer(map);
         }
     </script>
 </body>

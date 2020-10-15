@@ -15,7 +15,6 @@ for( const [map, layers] of Object.entries(maps_dict) ){
     var headerContainer = document.getElementsByClassName('headers_section')[0];
     headerContainer.appendChild(mapHeader);
 
-
     var body =  document.body;
 
     var mapContainer = document.getElementsByClassName('map_container')[0];
@@ -44,7 +43,7 @@ for( const [map, layers] of Object.entries(maps_dict) ){
 
         var map_a =  document.createElement('a');
         map_a.className = 'map';
-        map_a.href = `javascript:view_vehicles('${layer.layerClassname}');`;
+        map_a.href = `javascript:loadLayer('${layer.layerClassname}');`;
 
         var map_img =  document.createElement('img');
         map_img.className = 'map-img';

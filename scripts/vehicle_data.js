@@ -1,6 +1,9 @@
 /**
- * ideal vehicles data structure
+ * This file is intended to only hold static data
  * 
+ * 
+ * 
+ * ideal vehicles data structure:
  * 
  * vehicle_types = ["trackedifv", "jeep", "tank", "jeep_turret", ...]
  * 
@@ -23,8 +26,9 @@
  *  }
  */
 
+const vehicleVerboseWords = ['Truck','Logistics','Technical','Open Top','Transport'];
 
-var vehicle_icon_dict = {
+const vehicleIconDict = {
 	"BMP-1": "trackedifv",
 	"BMP-1 ZU23": "trackedifv",
 	"BMP-2": "trackedifv",
@@ -95,7 +99,7 @@ var vehicle_icon_dict = {
 	"Ural 375-D Truck ZU23": "truck_antiair"
 };
 
-var vehicle_data = {
+const layerVehicleData = {
     "Albasrah_AAS_v1": {
         "teamOne": {
             "vehicles": [

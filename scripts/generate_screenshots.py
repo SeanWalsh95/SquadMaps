@@ -18,12 +18,11 @@ class DriverContainer:
         self.driver = webdriver.Chrome(CHROMEDRIVER_PATH, chrome_options=options)
 
     def screenshot(self, map_id, output):
-        self.driver.execute_script('view_vehicles("{}")'.format(map_id))
+        self.driver.execute_script('loadLayer("{}")'.format(map_id))
         self.driver.save_screenshot(output)
 
 if __name__ == '__main__':
     
-
     resp = requests.get(url='https://raw.githubusercontent.com/Thomas-Smyth/SquadJS/master/core/squad-layers/layers.json')
     layer_list = resp.json() 
 
