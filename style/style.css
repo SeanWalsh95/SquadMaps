@@ -254,12 +254,16 @@ section div h3
 	padding-left: 10px;
 	vertical-align: super;
 }
+.ticket_icon
+{
+	width: 2em;
+}
 .modal_team_tickets
 {
 	display: inline-block;
 	color: #FFFFFF;
 	font: normal normal 700 2em "Roboto Condensed", sans-serif;
-	padding-left: 10px;
+	padding-left: 5px;
 	vertical-align: super;
 }
 .modal_team_vehicles

@@ -36,8 +36,8 @@ function loadLayer(map)
 	document.getElementById("team_1_name").innerHTML = fixFac(layer.teamOne.faction);
 	document.getElementById("team_2_name").innerHTML = fixFac(layer.teamTwo.faction);
 
-	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets} Tickets`;
-	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets} Tickets`;
+	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets}`;
+	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets}`;
 	
 	document.getElementById("map_link").href = `javascript:openNewTab("img/maps/full_size/${map}.jpg")`;
 	document.getElementById("map").style.backgroundImage = `url(img/maps/full_size/${map}.jpg)`;
