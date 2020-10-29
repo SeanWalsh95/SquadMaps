@@ -66,6 +66,7 @@ var maps_dict = {
     "Yehorivka":[]
 };
 
+var map = null;
 var layerDict = {};
 
 const emptyVicObject = { "teamTwo": {"vehicles": []}, "teamOne": {"vehicles": []} };

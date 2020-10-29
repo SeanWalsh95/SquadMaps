@@ -67,9 +67,12 @@ function loadLayer(layerID)
 
 	modal.style.display = "block";
 
-	
-	var map = L.map('map', {crs: L.CRS.Simple, attributionControl: false});
-	let img = `img/maps/full_size/${layerID}.jpg`;
+	if (map !== null) {
+		map.remove();
+	}
+
+	map = L.map('map', {crs: L.CRS.Simple, attributionControl: false});
+	let img = `img/maps/raw/${layer.map.replaceAll(' ','_')}.jpg`;
 
 	let bounds = [[-500,-500],[500,500]];
 	L.imageOverlay(img, bounds).addTo(map);
