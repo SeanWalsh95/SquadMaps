@@ -206,10 +206,9 @@ section div h3
 .modal_center_panel_top
 {
 	width: 100%;
-	height: 10%;
 	float: left;
 	color: #FFFFFF;
-	padding: 24px 0px;
+	padding: 18px 0px;
 	box-sizing: border-box;
 }
 .modal_center_panel_top div
@@ -229,10 +228,13 @@ section div h3
 	display: inline;
 	font: normal normal 300 1.5em "Roboto Condensed", sans-serif;
 }
+#map{
+	background: #222;
+}
 .modal_center_panel_bottom
 {
 	width: 100%;
-	height: 87%;
+	height: 85vh;
 	float: left;
 	overflow: hidden;
 	box-sizing: border-box;

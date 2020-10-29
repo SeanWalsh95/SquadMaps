@@ -7,8 +7,10 @@
 	<link rel="shortcut icon" href="img/icons/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="style/reset.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link rel="stylesheet" type="text/css" href="style/leaflet.css">
 	<link href="https://fonts.googleapis.com/css?family=Anton|Roboto+Condensed:300,700" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="scripts/leaflet.js"></script>
 	<script src="scripts/get_layers.js"></script>
 	
 </head>
@@ -41,9 +43,7 @@
 							<p class="modal_value" id="value_number_of_flags"></p>
 						</div>
 					</div>
-					<a id="map_link" href="">
 						<div class="modal_center_panel_bottom" id="map"></div>
-					</a>
 				</div>
 				<div class="modal_side_panel">
 					<img class="modal_flag" id="team_2_flag" src="img/icons/flag_USA.png">
@@ -67,9 +67,10 @@
         var searchParams = new URLSearchParams(document.location.search);
 
         if(searchParams.has('map')){
-            var map = searchParams.get('map');
-            loadLayer(map);
+            var layerID = searchParams.get('map');
+            loadLayer(layerID);
         }
+
     </script>
 </body>
 

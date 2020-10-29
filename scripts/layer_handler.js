@@ -17,11 +17,11 @@ function sortVehicleList(list){
 	})
 }
 
-function loadLayer(map)
+function loadLayer(layerID)
 {
-	console.log( `${map}:`, layerDict[map]);
+	console.log( `${layerID}:`, layerDict[layerID]);
 
-	const layer = layerDict[map];
+	const layer = layerDict[layerID];
 
 	var body = document.getElementsByTagName("BODY")[0];
 	body.style.overflow = "inherit";
@@ -39,8 +39,9 @@ function loadLayer(map)
 	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets}`;
 	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets}`;
 	
-	document.getElementById("map_link").href = `javascript:openNewTab("img/maps/full_size/${map}.jpg")`;
-	document.getElementById("map").style.backgroundImage = `url(img/maps/full_size/${map}.jpg)`;
+	if(document.getElementById("map_link"))
+		document.getElementById("map_link").href = `javascript:openNewTab("img/maps/full_size/${map}.jpg")`;
+	//document.getElementById("map").style.backgroundImage = `url(img/maps/full_size/${map}.jpg)`;
 
 
 	if (layer.commander)
@@ -65,4 +66,16 @@ function loadLayer(map)
 	layer.teamTwo.vehicles.forEach(vehicle => { t2List.appendChild(vehicle.genListItemElement()); });
 
 	modal.style.display = "block";
+
+	
+	var map = L.map('map', {crs: L.CRS.Simple, attributionControl: false});
+	let img = `img/maps/full_size/${layerID}.jpg`;
+
+	let bounds = [[-500,-500],[500,500]];
+	L.imageOverlay(img, bounds).addTo(map);
+	map.fitBounds(bounds);
+	
+	map.on('resize', function(e) {
+			map.fitWorld({reset: true});
+	});
 }
