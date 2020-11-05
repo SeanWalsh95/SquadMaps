@@ -71,14 +71,59 @@ function loadLayer(layerID)
 		map.remove();
 	}
 
-	map = L.map('map', {crs: L.CRS.Simple, attributionControl: false});
-	let img = `img/maps/raw/${layer.map.replaceAll(' ','_')}.jpg`;
+	map = L.map('map', {zoomSnap: 0.1, crs: L.CRS.Simple, attributionControl: false});
 
-	let bounds = [[-500,-500],[500,500]];
+	let mapName = layer.map.replace('CAF ','');
+	mapName = mapName.replaceAll(' ','_');
+	let img = `img/maps/raw/${mapName}.jpg`;
+
+	let bounds = [[-200,-200],[200,200]];
 	L.imageOverlay(img, bounds).addTo(map);
 	map.fitBounds(bounds);
 	
+	//var markers = new L.FeatureGroup();
+	//addMarkers(markers);
+
+	if(layer.layerClassname in mapLayerData){
+		var latlngs =  mapLayerData[layer.layerClassname];
+		L.polyline(latlngs, {color: 'white'}).addTo(map);
+	}
+
 	map.on('resize', function(e) {
 			map.fitWorld({reset: true});
 	});
+
+	map.on('click', function(e) {
+    console.log(e.latlng.lat + ", " + e.latlng.lng);
+	});
+	
+	/*map.on('zoomend', function() {
+		if (map.getZoom() <2.5){
+						map.removeLayer(markers);
+		}
+		else {
+						map.addLayer(markers);
+				}
+	});*/
+
+}
+
+
+function addMarkers(markers){
+
+	const markerDict = mapMarkers[layer.map];
+
+	for (const [name, latlngArr] of Object.entries(markerDict)){
+
+		let m = L.marker([latlngArr[0], latlngArr[1]], {
+			icon: new L.DivIcon({
+					className: 'my-div-icon',
+					html: `<span class="map-flag">${name}</span>`
+			})
+		})
+
+		markers.addLayer(m);
+	}
+	
+
 }
