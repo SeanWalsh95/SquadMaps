@@ -38,11 +38,6 @@ function loadLayer(layerID)
 
 	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets}`;
 	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets}`;
-	
-	if(document.getElementById("map_link"))
-		document.getElementById("map_link").href = `javascript:openNewTab("img/maps/full_size/${map}.jpg")`;
-	//document.getElementById("map").style.backgroundImage = `url(img/maps/full_size/${map}.jpg)`;
-
 
 	if (layer.commander)
 		document.getElementById("value_commander").innerHTML = "Yes";
@@ -81,54 +76,49 @@ function loadLayer(layerID)
 	L.imageOverlay(img, bounds).addTo(map);
 	map.fitBounds(bounds);
 	
-	//var markers = new L.FeatureGroup();
-	//addMarkers(markers);
+	var markerGroup = null;
 
 	if(layer.layerClassname in mapLayerData){
 		const layerData = mapLayerData[layer.layerClassname];
-		addMarkers(layerData);
-		L.polyline(Object.values(layerData), {color: 'white', opacity:0.8}).addTo(map);
+		console.log(layerData);
+		markerGroup = createMarkers(layerData);
+		markerGroup.addTo(map);
+		if(layer.gamemode !== 'RAAS')
+			L.polyline(Object.values(layerData), {color: 'white', opacity:0.8}).addTo(map);
+		map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
 	}
 
 	map.on('resize', function(e) {
+		if(markerGroup !== null)
+			map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
+		else
 			map.fitWorld({reset: true});
+
+		console.log(`resize ${markerGroup}`)
 	});
 
 	map.on('click', function(e) {
     console.log(e.latlng.lat + ", " + e.latlng.lng);
 	});
-	
-	/*map.on('zoomend', function() {
-		if (map.getZoom() <2.5){
-						map.removeLayer(markers);
-		}
-		else {
-						map.addLayer(markers);
-				}
-	});*/
 
 }
 
 
-function addMarkers(markerDict){
+function createMarkers(markerDict){
+	var markers = new L.FeatureGroup();
 	for (const [name, latlng] of Object.entries(markerDict)){
+		let isMain = name.match('(CAF|GB|INS|MEA|MIL|RUS|USA)');
+		let fOpacity = isMain ? 1.0 : 0.8;
+		let flag = isMain ? isMain[1] : 'Neutral';
 		let m = L.marker([latlng[0], latlng[1]], {
 			icon: new L.icon({
-					iconUrl: `img/icons/flag_Neutral.png`,
+					iconUrl: `img/icons/flag_${flag}.png`,
 					iconSize: [34,17]
 			}),
 			title: name,
-			opacity: 0.8
+			opacity: fOpacity
 		})
-		map.addLayer(m);
+		markers.addLayer(m);
 	}
-
+	return markers;
 }
-
-/**
- * 
- * icon: new L.DivIcon({
-					className: 'my-div-icon',
-					html: `<span class="map-flag">${name}</span>`
-			})
- */
