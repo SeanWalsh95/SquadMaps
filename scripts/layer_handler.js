@@ -85,8 +85,9 @@ function loadLayer(layerID)
 	//addMarkers(markers);
 
 	if(layer.layerClassname in mapLayerData){
-		var latlngs =  mapLayerData[layer.layerClassname];
-		L.polyline(latlngs, {color: 'white'}).addTo(map);
+		const layerData = mapLayerData[layer.layerClassname];
+		addMarkers(layerData);
+		L.polyline(Object.values(layerData), {color: 'white', opacity:0.8}).addTo(map);
 	}
 
 	map.on('resize', function(e) {
@@ -109,21 +110,25 @@ function loadLayer(layerID)
 }
 
 
-function addMarkers(markers){
+function addMarkers(markerDict){
+	for (const [name, latlng] of Object.entries(markerDict)){
+		let m = L.marker([latlng[0], latlng[1]], {
+			icon: new L.icon({
+					iconUrl: `img/icons/flag_Neutral.png`,
+					iconSize: [34,17]
+			}),
+			title: name,
+			opacity: 0.8
+		})
+		map.addLayer(m);
+	}
 
-	const markerDict = mapMarkers[layer.map];
+}
 
-	for (const [name, latlngArr] of Object.entries(markerDict)){
-
-		let m = L.marker([latlngArr[0], latlngArr[1]], {
-			icon: new L.DivIcon({
+/**
+ * 
+ * icon: new L.DivIcon({
 					className: 'my-div-icon',
 					html: `<span class="map-flag">${name}</span>`
 			})
-		})
-
-		markers.addLayer(m);
-	}
-	
-
-}
+ */
