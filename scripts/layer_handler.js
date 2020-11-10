@@ -68,6 +68,8 @@ function loadLayer(layerID)
 
 	map = L.map('map', {zoomSnap: 0.1, crs: L.CRS.Simple, attributionControl: false});
 
+	let tmpPointList = {};
+
 	let mapName = layer.map.replace('CAF ','');
 	mapName = mapName.replaceAll(' ','_');
 	let img = `img/maps/raw/${mapName}.jpg`;
@@ -96,8 +98,11 @@ function loadLayer(layerID)
 			map.fitWorld({reset: true});
 	});
 
+
 	map.on('click', function(e) {
-    console.log(e.latlng.lat + ", " + e.latlng.lng);
+		//console.log(e.latlng.lat + ", " + e.latlng.lng);
+		tmpPointList[`FLAG_${Object.keys(tmpPointList).length}`] = [e.latlng.lat, e.latlng.lng];
+		console.log(JSON.stringify(tmpPointList, null, 2));
 	});
 
 }
