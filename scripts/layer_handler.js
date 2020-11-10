@@ -102,7 +102,7 @@ function loadLayer(layerID)
 	map.on('click', function(e) {
 		//console.log(e.latlng.lat + ", " + e.latlng.lng);
 		tmpPointList[`FLAG_${Object.keys(tmpPointList).length}`] = [e.latlng.lat, e.latlng.lng];
-		console.log(JSON.stringify(tmpPointList, null, 2));
+		console.log(`"${layer.layerClassname}":${JSON.stringify(tmpPointList, null, 2)}`);
 	});
 
 }
