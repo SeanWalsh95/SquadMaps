@@ -83,18 +83,17 @@ function loadLayer(layerID)
 		console.log(layerData);
 		markerGroup = createMarkers(layerData);
 		markerGroup.addTo(map);
-		if(layer.gamemode !== 'RAAS')
+		if(layer.gamemode !== 'RAAS'){
 			L.polyline(Object.values(layerData), {color: 'white', opacity:0.8}).addTo(map);
-		map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
+			map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
+		}
 	}
 
 	map.on('resize', function(e) {
-		if(markerGroup !== null)
+		if(markerGroup !== null && layer.gamemode !== 'RAAS')
 			map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
 		else
 			map.fitWorld({reset: true});
-
-		console.log(`resize ${markerGroup}`)
 	});
 
 	map.on('click', function(e) {
