@@ -17,17 +17,24 @@ function sortVehicleList(list){
 	})
 }
 
-function loadLayer(layerID)
+
+function loadLayer(layerID){
+	currLayerID = layerID;
+	loadLayerInfo(layerID);
+	changeMap(layerDict[layerID]);
+}
+
+function loadLayerInfo(layerID)
 {
 	console.log( `${layerID}:`, layerDict[layerID]);
 
 	const layer = layerDict[layerID];
 
-	var body = document.getElementsByTagName("BODY")[0];
+	let body = document.getElementsByTagName("BODY")[0];
 	body.style.overflow = "inherit";
 
-	var t1List = document.getElementById("team_1_vehicles");
-	var t2List = document.getElementById("team_2_vehicles");
+	let t1List = document.getElementById("team_1_vehicles");
+	let t2List = document.getElementById("team_2_vehicles");
 
 	if( document.getElementById("layer_name") ){
 		document.getElementById("layer_name").innerHTML = layer.layer.replaceAll('_',' ');
@@ -62,67 +69,4 @@ function loadLayer(layerID)
 
 	modal.style.display = "block";
 
-	if (map !== null) {
-		map.remove();
-	}
-
-	map = L.map('map', {zoomSnap: 0.1, crs: L.CRS.Simple, attributionControl: false});
-
-	let tmpPointList = {};
-
-	let mapName = layer.map.replace('CAF ','');
-	mapName = mapName.replaceAll(' ','_');
-	let img = `img/maps/raw/${mapName}.jpg`;
-
-	let bounds = [[-200,-200],[200,200]];
-	L.imageOverlay(img, bounds).addTo(map);
-	map.fitBounds(bounds);
-	
-	var markerGroup = null;
-
-	if(layer.layerClassname in mapLayerData){
-		const layerData = mapLayerData[layer.layerClassname];
-		console.log(layerData);
-		markerGroup = createMarkers(layerData);
-		markerGroup.addTo(map);
-		if(layer.gamemode !== 'RAAS'){
-			L.polyline(Object.values(layerData), {color: 'white', opacity:0.8}).addTo(map);
-			map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
-		}
-	}
-
-	map.on('resize', function(e) {
-		if(markerGroup !== null && layer.gamemode !== 'RAAS')
-			map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
-		else
-			map.fitWorld({reset: true});
-	});
-
-
-	map.on('click', function(e) {
-		//console.log(e.latlng.lat + ", " + e.latlng.lng);
-		tmpPointList[`FLAG_${Object.keys(tmpPointList).length}`] = [e.latlng.lat, e.latlng.lng];
-		console.log(`"${layer.layerClassname}":${JSON.stringify(tmpPointList, null, 2)}`);
-	});
-
-}
-
-
-function createMarkers(markerDict){
-	var markers = new L.FeatureGroup();
-	for (const [name, latlng] of Object.entries(markerDict)){
-		let isMain = name.match('(CAF|GB|INS|MEA|MIL|RUS|USA)');
-		let fOpacity = isMain ? 1.0 : 0.8;
-		let flag = isMain ? isMain[1] : 'Neutral';
-		let m = L.marker([latlng[0], latlng[1]], {
-			icon: new L.icon({
-					iconUrl: `img/icons/flag_${flag}.png`,
-					iconSize: [34,17]
-			}),
-			title: name,
-			opacity: fOpacity
-		})
-		markers.addLayer(m);
-	}
-	return markers;
 }

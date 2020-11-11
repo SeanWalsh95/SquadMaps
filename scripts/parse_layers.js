@@ -66,6 +66,7 @@ var maps_dict = {
     "Yehorivka":[]
 };
 
+var currLayerID = null;
 var map = null;
 var layerDict = {};
 
@@ -81,21 +82,29 @@ for(const layerId in layerVehicleData){
     layerVehicleData[layerId].teamTwo.vehicles = t2List;
 }
 
-for(const layer of layersJson) {
-    layerDict[layer.layerClassname] = layer;
-    var merged_layer = Object.assign({}, layerDict[layer.layerClassname]);
-    if(layer.layerClassname in layerVehicleData){
-        Object.assign(merged_layer.teamOne, layerDict[layer.layerClassname].teamOne, layerVehicleData[layer.layerClassname].teamOne);
-        Object.assign(merged_layer.teamTwo, layerDict[layer.layerClassname].teamTwo, layerVehicleData[layer.layerClassname].teamTwo);
-    }else{
-        Object.assign(merged_layer.teamOne, layerDict[layer.layerClassname].teamOne, emptyVicObject.teamOne);
-        Object.assign(merged_layer.teamTwo, layerDict[layer.layerClassname].teamTwo, emptyVicObject.teamTwo);
-    }
-    for (const map in maps_dict) {
-        if(layer.map.match(map)){
-            maps_dict[map].push(merged_layer);
-        }
-    }
-}
-
 function fixFac(factionStr){ return factionStr.split('_')[0]; }
+
+function parseJsonData(){
+    for(const layer of layersJson) {
+        var merged_layer = {};
+        
+        Object.assign(merged_layer, layer);
+        
+        if(layer.layerClassname in mapLayerFlagData)
+            Object.assign(merged_layer, {"flags":mapLayerFlagData[layer.layerClassname]});
+
+        if(layer.layerClassname in layerVehicleData){
+            Object.assign(merged_layer.teamOne, layer.teamOne, layerVehicleData[layer.layerClassname].teamOne);
+            Object.assign(merged_layer.teamTwo, layer.teamTwo, layerVehicleData[layer.layerClassname].teamTwo);
+        }else{
+            Object.assign(merged_layer.teamOne, layer.teamOne, emptyVicObject.teamOne);
+            Object.assign(merged_layer.teamTwo, layer.teamTwo, emptyVicObject.teamTwo);
+        }
+        for (const map in maps_dict) {
+            if(layer.map.match(map)){
+                maps_dict[map].push(layer.layerClassname);
+            }
+        }
+        layerDict[layer.layerClassname] = merged_layer;
+    }
+    }

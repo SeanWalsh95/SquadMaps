@@ -2,43 +2,9 @@ body
 {
 	background-color: #010101;
 }
-.map
-{
-	z-index: 1;
-}
-.flag1{
-    text-align: left;
-}
-.flag2{
-    text-align: right;
-}
-.flag-img{
-	width: 45%;
-}
-.flags
-{
-	position: relative;
-	display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    top: -2vw;
-	padding-right: 15px;
-	padding-left: 15px;
-    z-index: 2;
-}
-.map-card-title
-{
-	display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-	padding-right: 15px;
-}
-.map-layer-card
-{
-	float: left;
-	width: 16.666%;
-	text-align: center;
-}
+
+
+
 
 .top_links
 {
@@ -80,7 +46,7 @@ section
 	padding: 10px 20px;
 	overflow: hidden;
 }
-.headers_section
+section.map-section-links
 {
 	text-align: center;
 }
@@ -105,15 +71,10 @@ section h2
 	font: normal normal 700 3em "Roboto Condensed", sans-serif;
 	margin-bottom: 10px;
 }
-section .map-img
-{
-	width: 95%;
-	height: auto;
-}
 section div h3
 {
 	color: #FFFFFF;
-	font: normal normal 700 1.5em "Roboto Condensed", sans-serif;
+	font: normal normal 700 1.3em "Roboto Condensed", sans-serif;
 	padding: 4px 0px 0px 10px;
 	float: left;
 	width: 100%;
@@ -122,27 +83,53 @@ section div h3
 	white-space: nowrap;
 	overflow: hidden;
 }
-.vehicles
+
+section div.map-card-flag-left
 {
-	float: right;
-	margin-right: 2%;
-	border-radius: 15px;
+    text-align: left;
+}
+section div.map-card-flag-right
+{
+    text-align: right;
+}
+section img.map-card-flag
+{
+	width: 45%;
+}
+section div.map-card-flags
+{
+	position: relative;
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: -2vw;
+	padding-right: 15px;
+	padding-left: 15px;
+    z-index: 2;
+}
+section img.map-img
+{
+	width: 95%;
+	height: auto;
+}
+section a.map-card
+{
+	z-index: 1;
+}
+section div.map-card-title
+{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	padding-right: 15px;
+}
+section div.map-layer-card
+{
+	float: left;
+	width: 16.666%;
 	text-align: center;
-	background-color: #FFC200;
-	width: 18%;
-	box-sizing: border-box;
-	margin-top: 4px;
 }
-.vehicles:hover
-{
-	background-color: #FFD446;
-}
-.vehicles img 
-{
-	width: 25px;
-	vertical-align: middle;
-	filter: brightness(0);
-}
+
 
 #modal_background
 {
