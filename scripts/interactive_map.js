@@ -2,6 +2,8 @@ class SquadMap {
 
   constructor(layerData){
 
+    this.fitBounds = null;
+
 		this.bounds = [[-200,-200],[200,200]];
     this.matchFaction = /^(CAF|GB|INS|MEA|MIL|RUS|USA)/;
     this.iconSize = [34,17];
@@ -67,8 +69,28 @@ function changeMap(layer){
 		layerDriver.getImageOverlay().addTo(map);
 		map.fitBounds(layerDriver.bounds);
     
-		var markerGroup = layerDriver.createMarkers();
-    markerGroup.addTo(map);
+    var markerGroup = layerDriver.createMarkers();
+    markerGroup.addTo(map);    
+
+    if(layer.layerClassname in mapBorderPolygons){
+      let polyPoints = [];
+
+      let a = layerDriver.bounds[0];
+      let b = layerDriver.bounds[1];
+      let outerBounds = [ a, [a[0],b[1]], b, [b[0],a[1]] ];
+
+      let polygonHole = mapBorderPolygons[layer.layerClassname];
+
+      //add inner polygon to group for fitBounds sizing 
+      markerGroup.addLayer(L.polygon(polygonHole, {opacity:0.0, fillOpacity:0.0}));
+
+      console.log(outerBounds)
+      polyPoints.push(outerBounds);
+      polyPoints.push(polygonHole);
+      let mapBorder = L.polygon(polyPoints, {color:"white", opacity:0.2, fillColor:"black", fillOpacity:0.7});
+      mapBorder.addTo(map);
+    }
+
     if(!['RAAS'].includes(layer.gamemode)){
       layerDriver.createLine({color:'white', opacity:0.8}).addTo(map);
       map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
