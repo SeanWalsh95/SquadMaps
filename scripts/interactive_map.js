@@ -10,7 +10,7 @@ class SquadMap {
 
     this.id = layerData.classname;    
     this.mapName = layerData.map.replace('CAF ', '').replaceAll(' ','_');
-    this.flagDict = layerData.hasOwnProperty('flags') ? layerData.flags : null;
+    this.flagDict = this.id in mapLayerFlagData ? mapLayerFlagData[this.id] : null;
     this.tOne = layerData.teamOne;
     this.tTwo = layerData.teamTwo;
     this.gamemode = layerData.gamemode;
