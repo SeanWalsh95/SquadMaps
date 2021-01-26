@@ -33,7 +33,7 @@ if __name__ == '__main__':
     chrome.driver.maximize_window()
 
     for layer in layer_list:
-        layer_name = layer['layerClassname']
+        layer_name = layer['classname']
         img_path = os.path.abspath('../img/screens/{}.png'.format(layer_name))
         chrome.screenshot(layer_name, img_path)
 

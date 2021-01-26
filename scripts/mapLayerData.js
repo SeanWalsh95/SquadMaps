@@ -1,5 +1,5 @@
 const mapLayerFlagData = {
-  "Albasrah_AAS_v1": {
+  "al_basrah_aas_v1": {
     "USA Main": [
       86.68754184802967,
       -76.93607866194881
@@ -37,7 +37,7 @@ const mapLayerFlagData = {
       74.03820624084646
     ]
   },
-  "Albasrah_AAS_v2": {
+  "al_basrah_aas_v2": {
     "USA Main": [
       86.68754184802967,
       -76.93607866194881
@@ -75,7 +75,7 @@ const mapLayerFlagData = {
       74.03820624084646
     ]
   },
-  "Albasrah_Invasion_v1": {
+  "al_basrah_invasion_v1": {
     "GB Main": [
       86.68754184802967,
       -76.93607866194881
@@ -109,7 +109,7 @@ const mapLayerFlagData = {
       74.03820624084646
     ]
   },
-  "Albasrah_Invasion_v2": {
+  "al_basrah_invasion_v2": {
     "GB Main": [
       178.19243867215866,
       45.25685619158875
@@ -143,7 +143,7 @@ const mapLayerFlagData = {
       74.03820624084646
     ]
   },
-  "CAF_Albasrah_Invasion_v1": {
+  "caf_al_basrah_invasion_v1": {
     "CAF Main": [
       178.19243867215866,
       45.25685619158875
@@ -173,7 +173,7 @@ const mapLayerFlagData = {
       74.03820624084646
     ]
   },
-  "CAF_Albasrah_Invasion_v2": {
+  "caf_al_basrah_invasion_v2": {
     "CAF Main": [
       -132.64656832630945,
       -150.08439380641775
@@ -203,7 +203,7 @@ const mapLayerFlagData = {
       45.25685619158875
     ]
   },
-  "Albasrah_RAAS_v1": {
+  "al_basrah_raas_v1": {
     "MIL Main": [
       86.68754184802967,
       -76.93607866194881
@@ -213,7 +213,7 @@ const mapLayerFlagData = {
       74.03820624084646
     ]
   },
-  "Albasrah_Skirmish_v1": {
+  "al_basrah_skirmish_v1": {
     "GB Main": [
       -135.2323922220869,
       -12.660231694452717
@@ -243,7 +243,7 @@ const mapLayerFlagData = {
       57.953859316904804
     ]
   },
-  "Albasrah_Skirmish_v2": {
+  "al_basrah_skirmish_v2": {
     "MIL Main": [
       -51.27863303986223,
       -116.23375222346664
@@ -269,7 +269,7 @@ const mapLayerFlagData = {
       15.854929509044377
     ]
   },
-  "Belaya_AAS_v1": {
+  "belaya_aas_v1": {
     "RUS Main": [
       142.9662024706217,
       93.88195510077897
@@ -299,7 +299,7 @@ const mapLayerFlagData = {
       -143.80509533321913
     ]
   },
-  "Belaya_AAS_v2": {
+  "belaya_aas_v2": {
     "RUS Main": [
       142.9662024706217,
       93.88195510077897
@@ -337,7 +337,7 @@ const mapLayerFlagData = {
       -143.80509533321913
     ]
   },
-  "CAF_Belaya_AAS_v1": {
+  "caf_belaya_aas_v1": {
     "CAF Main": [
       142.9662024706217,
       93.88195510077897
@@ -367,7 +367,7 @@ const mapLayerFlagData = {
       -143.80509533321913
     ]
   },
-  "Belaya_Skirmish_v1": {
+  "belaya_skirmish_v1": {
     "MIL Main": [
       183.7113638104928,
       62.8614494494911
@@ -397,7 +397,7 @@ const mapLayerFlagData = {
       -6.3863108599438965
     ]
   },
-  "Belaya_RAAS_v1": {
+  "belaya_raas_v1": {
     "RUS Main": [
       143.07448804523577,
       93.58289810872654
@@ -407,7 +407,7 @@ const mapLayerFlagData = {
       -146.24850087559366
     ]
   },
-  "CAF_Belaya_RAAS_v1": {
+  "caf_belaya_raas_v1": {
     "RUS Main": [
       143.07448804523577,
       93.58289810872654
@@ -417,7 +417,7 @@ const mapLayerFlagData = {
       -146.24850087559366
     ]
   },
-  "Belaya_RAAS_v2": {
+  "belaya_raas_v2": {
     "USA Main": [
       143.07448804523577,
       93.58289810872654
@@ -427,7 +427,7 @@ const mapLayerFlagData = {
       -146.24850087559366
     ]
   },
-  "CAF_Belaya_RAAS_v2": {
+  "caf_belaya_raas_v2": {
     "MIL Main": [
       143.07448804523577,
       93.58289810872654
@@ -437,7 +437,7 @@ const mapLayerFlagData = {
       -146.24850087559366
     ]
   },
-  "Belaya_RAAS_v3": {
+  "belaya_raas_v3": {
     "GB Main": [
       143.07448804523577,
       93.58289810872654
@@ -447,7 +447,7 @@ const mapLayerFlagData = {
       -146.24850087559366
     ]
   },
-  "Yehorivka_AAS_v1":{
+  "yehorivka_aas_v1":{
     "RUS Main": [
       165.34598191994712,
       24.414959089523
@@ -485,7 +485,7 @@ const mapLayerFlagData = {
       1.0417177319023614
     ]
   },
-  "Yehorivka_AAS_v2":{
+  "yehorivka_aas_v2":{
     "RUS Main": [
       160.5085658132936,
       116.49097989400822
@@ -523,7 +523,7 @@ const mapLayerFlagData = {
       -103.58671727501452
     ]
   },
-  "Yehorivka_Invasion_v1":{
+  "yehorivka_invasion_v1":{
     "MIL Main": [
     160.4753553671283,
     13.099785391197317
@@ -553,7 +553,7 @@ const mapLayerFlagData = {
       168.6245499274609
     ]
   },
-  "CAF_Yehorivka_Invasion_v1":{
+  "caf_yehorivka_invasion_v1":{
     "MIL Main": [
       160.4753553671283,
       13.099785391197317
@@ -583,7 +583,7 @@ const mapLayerFlagData = {
       168.6245499274609
     ]
   },
-  "Yehorivka_Invasion_v2":{
+  "yehorivka_invasion_v2":{
     "RUS Main": [
       161.82390675270804,
       117.04187333308803
@@ -618,15 +618,15 @@ const mapLayerFlagData = {
 
 
 const mapLayerBounds = {
-  "Albasrah_TA_v1":[[13.258995477770348, 69.3492504019142],[-175.25825248196037, -20.45695616382685]],
-  "Albasrah_TC_v2":[[95.32753921627824, 176.1532417738262],[-200.9019867522365, -104.90194322080025]],
-  "Albasrah_Insurgency_v1":[[137.24799032457696, 91.78187196464174],[-266.8475768626502, -100.72194597178607]],
-  "Yehorivka_TA_v1":[[107.42545908947966, -18.93588481104074],[-81.09178887025104, -108.7420913767818]]
+  "al_basrah_ta_v1":[[13.258995477770348, 69.3492504019142],[-175.25825248196037, -20.45695616382685]],
+  "al_basrah_tc_v2":[[95.32753921627824, 176.1532417738262],[-200.9019867522365, -104.90194322080025]],
+  "al_basrah_insurgency_v1":[[137.24799032457696, 91.78187196464174],[-266.8475768626502, -100.72194597178607]],
+  "yehorivka_ta_v1":[[107.42545908947966, -18.93588481104074],[-81.09178887025104, -108.7420913767818]]
 }
 
 
 const mapBorderPolygons = {
-  "Belaya_Skirmish_v1": [
+  "belaya_skirmish_v1": [
     [
       188.69613965354418,
       82.16675689312513
@@ -671,7 +671,7 @@ const mapBorderPolygons = {
       59.4416242872274
     ]
   ],
-  "Albasrah_Skirmish_v2":[
+  "al_basrah_skirmish_v2":[
     [
       23.438250776591705,
       19.3637638897541

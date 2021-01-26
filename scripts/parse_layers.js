@@ -1,12 +1,42 @@
+const facMap = {
+    "British Army": "GB",
+    "Canadian Army": "CAF",
+    "Insurgents": "INS",
+    "Irregular Militia": "MIL",
+    "Middle Eastern Alliance": "MEA",
+    "Russian Ground Forces": "RUS",
+    "US Army": "USA"
+}
+
+class SQLayer{
+    constructor(jsonData){
+        this.classname = jsonData.Name.toLowerCase().replaceAll(/ /g, '_').replaceAll(/[<>:'"\\\/\|\?\*]/g,'')
+        this.name = jsonData.Name
+        this.teamOne = {
+            faction: facMap[jsonData.Team1.Faction],
+            tickets: jsonData.Team1.Tickets,
+            vehicles: jsonData.Team1.Vehicles.map( (vicData)=> {return new SQVehicle(vicData)} )
+        } 
+        this.teamTwo = {
+            faction: facMap[jsonData.Team2.Faction],
+            tickets: jsonData.Team2.Tickets,
+            vehicles: jsonData.Team2.Vehicles.map( (vicData)=> {return new SQVehicle(vicData)} )
+        } 
+        this.flagCount = jsonData.CapturePoints
+        this.flags = jsonData.Flags
+    }
+}
+
 class SQVehicle {
     constructor(vicData){
-        this.name = vicData.name;
-        this.quantity = vicData.quantity;
-        if(vicData.delay)
-            this.delay = vicData.delay;
+        this.name = vicData.Name;
+        this.quantity = vicData.Count;
+        this.displayName = vicData.DisplayName
+        if(vicData.Delay)
+            this.delay = vicData.Delay;
         else
             this.delay = 0;
-    }
+}
 
     shortName(){
 		var shortName = this.name;
@@ -22,17 +52,18 @@ class SQVehicle {
 		listItem.appendChild(countParagraph);
 
 		var img = document.createElement("img");		
-		if(this.name in vehicleIconDict){
-			img.src = `img/icons/map_${vehicleIconDict[this.name]}.png`;
+		if(this.displayName in vehicleIconDict){
+			img.src = `img/icons/map_${vehicleIconDict[this.displayName]}.png`;
 		}
 		listItem.appendChild(img);
 
-		var vicNameHeader = document.createElement("h6");
-		vicNameHeader.textContent = this.shortName();
+		var vicNameHeader = document.createElement("a");
+        vicNameHeader.textContent = this.shortName();        
+        vicNameHeader.href = `javascript:openInNewTab('https://squad.gamepedia.com/${this.name}');`;
 		listItem.appendChild(vicNameHeader);
 
 		if(this.delay){
-			var delay =  "Delayed " + this.delay / 60 + " mins";
+			var delay =  `Delayed ${this.delay} mins`;
 			var vicDelaySmall = document.createElement("small");
 			vicDelaySmall.textContent = delay;
 			listItem.appendChild(document.createElement('br'));
@@ -70,41 +101,24 @@ var currLayerID = null;
 var map = null;
 var layerDict = {};
 
-const emptyVicObject = { "teamTwo": {"vehicles": []}, "teamOne": {"vehicles": []} };
-
-for(const layerId in layerVehicleData){
-    var t1List = [];
-    for(const vic of layerVehicleData[layerId].teamOne.vehicles){ t1List.push(new SQVehicle(vic)); }
-    layerVehicleData[layerId].teamOne.vehicles = t1List;
-    
-    var t2List = [];
-    for(const vic of layerVehicleData[layerId].teamTwo.vehicles){ t2List.push(new SQVehicle(vic)); }
-    layerVehicleData[layerId].teamTwo.vehicles = t2List;
-}
-
-function fixFac(factionStr){ return factionStr.split('_')[0]; }
-
 function parseJsonData(){
     for(const layer of layersJson) {
         var merged_layer = {};
-        
+       
         Object.assign(merged_layer, layer);
         
-        if(layer.layerClassname in mapLayerFlagData)
-            Object.assign(merged_layer, {"flags":mapLayerFlagData[layer.layerClassname]});
+        if(layer.classname in mapLayerFlagData)
+            Object.assign(merged_layer, {"flags":mapLayerFlagData[layer.classname]});
 
-        if(layer.layerClassname in layerVehicleData){
-            Object.assign(merged_layer.teamOne, layer.teamOne, layerVehicleData[layer.layerClassname].teamOne);
-            Object.assign(merged_layer.teamTwo, layer.teamTwo, layerVehicleData[layer.layerClassname].teamTwo);
-        }else{
-            Object.assign(merged_layer.teamOne, layer.teamOne, emptyVicObject.teamOne);
-            Object.assign(merged_layer.teamTwo, layer.teamTwo, emptyVicObject.teamTwo);
-        }
         for (const map in maps_dict) {
-            if(layer.map.match(map)){
-                maps_dict[map].push(layer.layerClassname);
+            if(layer.name.match(map)){
+                let match = layer.name.match(/(\w+) [vV](\d+)/);
+                merged_layer.map = map
+                merged_layer.gamemode = match[1]
+                merged_layer.version = match[2]
+                maps_dict[map].push(layer.classname);
             }
         }
-        layerDict[layer.layerClassname] = merged_layer;
+        layerDict[layer.classname] = merged_layer;
     }
     }

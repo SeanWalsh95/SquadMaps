@@ -17,6 +17,10 @@ function sortVehicleList(list){
 	})
 }
 
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
 
 function loadLayer(layerID){
 	currLayerID = layerID;
@@ -37,11 +41,11 @@ function loadLayerInfo(layerID)
 	let t2List = document.getElementById("team_2_vehicles");
 
 	if( document.getElementById("layer_name") ){
-		document.getElementById("layer_name").innerHTML = layer.layer.replaceAll('_',' ');
+		document.getElementById("layer_name").innerHTML = layer.name;
 	}
 
-	document.getElementById("team_1_name").innerHTML = fixFac(layer.teamOne.faction);
-	document.getElementById("team_2_name").innerHTML = fixFac(layer.teamTwo.faction);
+	document.getElementById("team_1_name").innerHTML = layer.teamOne.faction;
+	document.getElementById("team_2_name").innerHTML = layer.teamTwo.faction;
 
 	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets}`;
 	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets}`;
@@ -55,8 +59,8 @@ function loadLayerInfo(layerID)
 	document.getElementById("value_number_of_flags").innerHTML = layer.flagCount ;
 
 
-	document.getElementById("team_1_flag").src = `img/icons/flag_${fixFac(layer.teamOne.faction)}.png`
-	document.getElementById("team_2_flag").src = `img/icons/flag_${fixFac(layer.teamTwo.faction)}.png`
+	document.getElementById("team_1_flag").src = `img/icons/flag_${layer.teamOne.faction}.png`
+	document.getElementById("team_2_flag").src = `img/icons/flag_${layer.teamTwo.faction}.png`
 	
 
 	document.querySelector('#team_1_vehicles').innerHTML = "";

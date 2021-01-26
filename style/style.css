@@ -279,7 +279,10 @@ section div.map-layer-card
 	display: inline-block;
 	vertical-align: -50%;
 }
-.modal_content li h6
+
+
+
+.modal_content li a
 {
 	display: inline-block;
 	color: #FFFFFF;

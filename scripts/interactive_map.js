@@ -8,7 +8,7 @@ class SquadMap {
     this.matchFaction = /^(CAF|GB|INS|MEA|MIL|RUS|USA)/;
     this.iconSize = [34,17];
 
-    this.id = layerData.layerClassname;    
+    this.id = layerData.classname;    
     this.mapName = layerData.map.replace('CAF ', '').replaceAll(' ','_');
     this.flagDict = layerData.hasOwnProperty('flags') ? layerData.flags : null;
     this.tOne = layerData.teamOne;
@@ -72,14 +72,14 @@ function changeMap(layer){
     var markerGroup = layerDriver.createMarkers();
     markerGroup.addTo(map);    
 
-    if(layer.layerClassname in mapBorderPolygons){
+    if(layer.classname in mapBorderPolygons){
       let polyPoints = [];
 
       let a = layerDriver.bounds[0];
       let b = layerDriver.bounds[1];
       let outerBounds = [ a, [a[0],b[1]], b, [b[0],a[1]] ];
 
-      let polygonHole = mapBorderPolygons[layer.layerClassname];
+      let polygonHole = mapBorderPolygons[layer.classname];
 
       //add inner polygon to group for fitBounds sizing 
       markerGroup.addLayer(L.polygon(polygonHole, {opacity:0.0, fillOpacity:0.0}));
@@ -106,15 +106,15 @@ function changeMap(layer){
     map.on('click', function(e) {
       //console.log(e.latlng.lat + ", " + e.latlng.lng);
       tmpPointList[`FLAG_${Object.keys(tmpPointList).length}`] = [e.latlng.lat, e.latlng.lng];
-      console.log(`"${layer.layerClassname}":${JSON.stringify(tmpPointList, null, 2)}`);
+      console.log(`"${layer.classname}":${JSON.stringify(tmpPointList, null, 2)}`);
     });
 
   }else{
 		let bounds = [[-200,-200],[200,200]];
-    L.imageOverlay(`img/maps/full_size/${layer.layerClassname}.jpg`, bounds).addTo(map);
+    L.imageOverlay(`img/maps/full_size/${layer.classname}.jpg`, bounds).addTo(map);
     
-    if (layer.layerClassname in mapLayerBounds){
-      map.fitBounds(mapLayerBounds[layer.layerClassname]);
+    if (layer.classname in mapLayerBounds){
+      map.fitBounds(mapLayerBounds[layer.classname]);
       console.log('set defined bounds')
     }
     else{
