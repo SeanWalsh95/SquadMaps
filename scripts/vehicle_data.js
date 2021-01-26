@@ -123,8 +123,9 @@ class SQVehicle {
 		countParagraph.textContent = this.quantity;
 		listItem.appendChild(countParagraph);
 
-		var img = document.createElement("img");
-        img.src = this.displayName in vehicleIconDict ? `img/icons/map_${vehicleIconDict[this.displayName]}.png` : `img/icons/map_jeep_transport.png`;
+        var img = document.createElement("img");
+        var iconName = this.displayName in vehicleIconDict ? vehicleIconDict[this.displayName] : "jeep_transport";
+        img.src = `img/icons/map_${iconName}.png`;
 
 		listItem.appendChild(img);
 
