@@ -62,7 +62,7 @@ function changeMap(layer){
 
 	let tmpPointList = {};
 
-  if(layer.hasOwnProperty('flags')){
+  if(layer.classname in mapLayerFlagData){
 
     layerDriver = new SquadMap(layer);
 
