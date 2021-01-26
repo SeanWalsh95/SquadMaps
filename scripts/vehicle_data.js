@@ -97,4 +97,50 @@ const vehicleIconDict = {
 	"Ural 375-D Truck Logistics": "truck_logistics",
 	"Ural 375-D Truck Transport": "truck_transport",
 	"Ural 375-D Truck ZU23": "truck_antiair"
-};
+}
+
+class SQVehicle {
+    constructor(vicData){
+        this.name = vicData.Name;
+        this.quantity = vicData.Count;
+        this.displayName = vicData.DisplayName
+        if(vicData.Delay)
+            this.delay = vicData.Delay;
+        else
+            this.delay = 0;
+}
+
+    shortName(){
+		var shortName = this.displayName;
+		for(const word of vehicleVerboseWords){ shortName = shortName.replace(word, ''); }
+        return shortName.trim();
+    }
+
+    genListItemElement(){
+		var listItem = document.createElement("li");
+
+		var countParagraph = document.createElement("p");
+		countParagraph.textContent = this.quantity;
+		listItem.appendChild(countParagraph);
+
+		var img = document.createElement("img");		
+		if(this.displayName in vehicleIconDict){
+			img.src = `img/icons/map_${vehicleIconDict[this.displayName]}.png`;
+		}
+		listItem.appendChild(img);
+
+		var vicNameHeader = document.createElement("a");
+        vicNameHeader.textContent = this.shortName();        
+        vicNameHeader.href = `javascript:openInNewTab('https://squad.gamepedia.com/${this.name}');`;
+		listItem.appendChild(vicNameHeader);
+
+		if(this.delay){
+			var delay =  `Delayed ${this.delay} mins`;
+			var vicDelaySmall = document.createElement("small");
+			vicDelaySmall.textContent = delay;
+			listItem.appendChild(document.createElement('br'));
+			listItem.appendChild(vicDelaySmall);
+		}
+        return listItem;
+    }
+}
