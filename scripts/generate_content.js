@@ -36,7 +36,7 @@ function generateContent(){
             cardTitle.className = 'map-card-title';
             
             var layerH3 = document.createElement('h3');
-            layerH3.textContent = `${layer.gamemode} V${layer.version}`;
+            layerH3.textContent = `${gmAbbv[layer.gamemode]} ${layer.version}`;
             cardTitle.appendChild(layerH3);
 
             layerDiv.appendChild(cardTitle);
