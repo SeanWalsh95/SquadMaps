@@ -1,7 +1,5 @@
 /**
- * This file is intended to only hold static data
- * 
- * 
+ * Vehicle related data and classes
  * 
  * ideal vehicles data structure:
  * 
@@ -26,7 +24,6 @@
  *  }
  */
 
-const vehicleVerboseWords = ['Truck','Logistics','Technical','Open Top','Transport'];
 
 const vehicleIconDict = {
 	"BMP-1": "trackedifv",
@@ -40,7 +37,7 @@ const vehicleIconDict = {
 	"FV432": "trackedapc",
 	"FV432 RWS": "trackedapc",
 	"FV510": "trackedifv",
-	"FV510 (Up-Armoured)": "trackedifv",
+	"FV510 (Up-Armoured)": "trackedifv_uparmour",
 	"Kamaz 5350 Truck Logistics": "truck_logistics",
 	"Kamaz 5350 Truck Transport": "truck_transport",
 	"LAV 6.0": "ifv",
@@ -99,6 +96,8 @@ const vehicleIconDict = {
 	"Ural 375-D Truck ZU23": "truck_antiair"
 }
 
+const vehicleVerboseWords = [['Truck',''],['Logistics',''],['Technical',''],['Open Top',''],['Transport',''],['(Up-Armoured)','UA']];
+
 class SQVehicle {
     constructor(vicData){
         this.name = vicData.Name;
@@ -111,9 +110,9 @@ class SQVehicle {
 }
 
     shortName(){
-		var shortName = this.displayName;
-		for(const word of vehicleVerboseWords){ shortName = shortName.replace(word, ''); }
-        return shortName.trim();
+			var shortName = this.displayName;
+			for(const [word, replacement] of vehicleVerboseWords){ shortName = shortName.replace(word, replacement); }
+			return shortName.trim();
     }
 
     genListItemElement(){
