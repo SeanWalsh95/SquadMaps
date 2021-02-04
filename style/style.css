@@ -162,6 +162,25 @@ section div.map-layer-card
 {
 	flex-grow: 1;
 }
+
+.faction_header
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.faction_select
+{
+	padding-left: 10px;
+	width: 40%;
+	display: inline-block;
+	font: normal normal 700 1.3em "Roboto Condensed", sans-serif;
+}
+.loadout_select
+{
+	height: 25px;
+	width: 100%;
+}
 .modal_content h2
 {
 	border-bottom: 2px solid #FFC200;

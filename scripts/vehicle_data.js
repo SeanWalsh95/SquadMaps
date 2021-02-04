@@ -96,50 +96,51 @@ const vehicleIconDict = {
 	"Ural 375-D Truck ZU23": "truck_antiair"
 }
 
-const vehicleVerboseWords = [['Truck',''],['Logistics',''],['Technical',''],['Open Top',''],['Transport',''],['(Up-Armoured)','UA']];
+const vehicleVerboseWords = [['Truck',''],['Logistics',''],['Technical',''],['Open Top',''],['Transport',''],['(Up-Armoured)','UA'], ['M2 HB', ''],['M1126 CROWS','M1126']];
 
 class SQVehicle {
-    constructor(vicData){
-        this.name = vicData.Name;
-        this.quantity = vicData.Count;
-        this.displayName = vicData.DisplayName
-        if(vicData.Delay)
-            this.delay = vicData.Delay;
-        else
-            this.delay = 0;
+    constructor(jsonData){
+				this.name = ignoreCaseSearch(jsonData,'type');
+				this.classname =  ignoreCaseSearch(jsonData,'rawType');
+				this.quantity = parseInt(ignoreCaseSearch(jsonData,'count'));
+				this.delay = ignoreCaseSearch(jsonData,'delay') || 0;
+				this.icon = ignoreCaseSearch(jsonData,'icon');
+				if (this.icon)
+					this.icon = this.icon.replace('map_','')
 }
 
     shortName(){
-			var shortName = this.displayName;
+			var shortName = this.name;
 			for(const [word, replacement] of vehicleVerboseWords){ shortName = shortName.replace(word, replacement); }
 			return shortName.trim();
     }
 
     genListItemElement(){
-		var listItem = document.createElement("li");
+			var listItem = document.createElement("li");
 
-		var countParagraph = document.createElement("p");
-		countParagraph.textContent = this.quantity;
-		listItem.appendChild(countParagraph);
+			var countParagraph = document.createElement("p");
+			countParagraph.textContent = this.quantity;
+			listItem.appendChild(countParagraph);
 
-        var img = document.createElement("img");
-        var iconName = this.displayName in vehicleIconDict ? vehicleIconDict[this.displayName] : "jeep_transport";
-        img.src = `img/icons/map_${iconName}.png`;
+			var img = document.createElement("img");
+			var vicIcon = this.icon || "jeep_transport";
+			img.src = `img/icons/map_${vicIcon}.png`;
 
-		listItem.appendChild(img);
+			listItem.appendChild(img);
 
-		var vicNameHeader = document.createElement("a");
-        vicNameHeader.textContent = this.shortName();        
-        vicNameHeader.href = `javascript:openInNewTab('https://squad.gamepedia.com/${this.name}');`;
-		listItem.appendChild(vicNameHeader);
+			var vicNameHeader = document.createElement("a");
+			vicNameHeader.textContent = this.shortName();        
+			vicNameHeader.href = `javascript:openInNewTab('https://squad.gamepedia.com/${this.name.split(' ')[0]}');`;
+			listItem.appendChild(vicNameHeader);
 
-		if(this.delay){
-			var delay =  `Delayed ${this.delay} mins`;
-			var vicDelaySmall = document.createElement("small");
-			vicDelaySmall.textContent = delay;
-			listItem.appendChild(document.createElement('br'));
-			listItem.appendChild(vicDelaySmall);
-		}
-        return listItem;
+			if(this.delay){
+				var delay =  `Delayed ${this.delay} mins`;
+				var vicDelaySmall = document.createElement("small");
+				vicDelaySmall.textContent = delay;
+				listItem.appendChild(document.createElement('br'));
+				listItem.appendChild(vicDelaySmall);
+			}
+
+			return listItem;
     }
 }

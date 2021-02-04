@@ -10,10 +10,10 @@
 	<link rel="shortcut icon" href="img/icons/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="style/reset.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
-	<link rel="stylesheet" type="text/css" href="style/leaflet.css">
+	<link rel="stylesheet" type="text/css" href="lib/leaflet/css/leaflet.css">
 	<link href="https://fonts.googleapis.com/css?family=Anton|Roboto+Condensed:300,700" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="scripts/leaflet.js"></script>
+	<script src="lib/leaflet/leaflet.js"></script>
 	<script src="scripts/mapLayerData.js"></script>
 </head>
 
@@ -35,11 +35,17 @@
 			<h2 id="layer_name"></h2>
 			<div class="full_height">
 				<div class="modal_side_panel">
-					<img class="modal_flag" id="team_1_flag" src="img/icons/flag_USA.png">
-					<h3 class="modal_team_name" id="team_1_name"></h3>
-					<br>
-					<img class="ticket_icon" src="img/icons/ticket.png">
-					<h4 class="modal_team_tickets" id="team_1_tickets"></h4>
+					<div class="faction_header">
+						<img class="modal_flag" id="team_1_flag" src="img/icons/flag_undefined.png">
+						<select class="faction_select" id="team_1_fac_options">
+						</select>
+					</div>
+					<select class="loadout_select" id="team_1_load_options">
+					</select>
+					<div>
+						<img class="ticket_icon" src="img/icons/ticket.png">
+						<h4 class="modal_team_tickets" id="team_1_tickets"></h4>
+					</div>
 					<ul class="modal_team_vehicles" id="team_1_vehicles">
 					</ul>
 				</div>
@@ -61,8 +67,13 @@
 						<div class="modal_center_panel_bottom" id="map"></div>
 				</div>
 				<div class="modal_side_panel">
-					<img class="modal_flag" id="team_2_flag" src="img/icons/flag_USA.png">
-					<h3 class="modal_team_name" id="team_2_name"></h3>
+					<div class="faction_header">
+						<img class="modal_flag" id="team_2_flag" src="img/icons/flag_undefined.png">
+						<select class="faction_select" id="team_2_fac_options">
+						</select>
+					</div>
+					<select class="loadout_select" id="team_2_load_options">
+					</select>
 					<br>
 					<img class="ticket_icon" src="img/icons/ticket.png">
 					<h4 class="modal_team_tickets" id="team_2_tickets"></h4>
@@ -72,6 +83,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="scripts/utils.js"></script>
 	<script src="scripts/vehicle_data.js"></script>
 	<script src="scripts/parse_layers.js"></script>
 	<script src="scripts/generate_content.js"></script>
