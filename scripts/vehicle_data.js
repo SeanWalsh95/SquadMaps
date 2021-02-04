@@ -96,13 +96,28 @@ const vehicleIconDict = {
 	"Ural 375-D Truck ZU23": "truck_antiair"
 }
 
-const vehicleVerboseWords = [['Truck',''],['Logistics',''],['Technical',''],['Open Top',''],['Transport',''],['(Up-Armoured)','UA'], ['M2 HB', ''],['M1126 CROWS','M1126']];
+const vehicleVerboseWords = [
+	['Truck',''],
+	['Logistics',''],
+	['Technical','Tec.'],
+	['Open Top',''],
+	['Transport',''],
+	['(Up-Armoured)','UA'],
+	['Armored','UA'],
+	['M2 HB', 'M2'],
+	['M1126 CROWS','M1126'],
+	['CAN',''],
+	['RWS',''],
+	['Shielded', 'Shld.'],
+	['ZU-23-2', 'AA'],
+	['Ural-', '']
+];
 
 class SQVehicle {
     constructor(jsonData){
 				this.name = ignoreCaseSearch(jsonData,'type');
 				this.classname =  ignoreCaseSearch(jsonData,'rawType');
-				this.quantity = parseInt(ignoreCaseSearch(jsonData,'count'));
+				this.quantity = parseInt(ignoreCaseSearch(jsonData,'count')) || 1;
 				this.delay = ignoreCaseSearch(jsonData,'delay') || 0;
 				this.icon = ignoreCaseSearch(jsonData,'icon');
 				if (this.icon)

@@ -26,13 +26,13 @@ var maps_dict = {
     "Fallujah":[],
     "Fool's Road":[],
     "Gorodok":[],
-    "Jensen's Range":[],
+    "Jensen's":[],
     "Kamdesh":[],
     "Kohat":[],
     "Kokan":[],
     "Lashkar Valley":[],
     "Logar":[],
-    "Manic-5":[],
+    "Manic":[],
     "Mestia":[],
     "Mutaha":[],
     "Narva":[],
@@ -133,7 +133,7 @@ class SQLayer{
     constructor(jsonData){
         this.name = ignoreCaseSearch(jsonData,'name')
 
-        this.classname = jsonData.rawName || this.name
+        this.classname = this.name
         this.classname = this.classname.toLowerCase().replaceAll(/ /g, '_').replaceAll(/[<>:'"\\\/\|\?\*]/g,'')
 
         this.lighting = jsonData.lighting
@@ -191,21 +191,18 @@ class SQLayer{
     genFactionOptionElements(){ 
         var facOptions = {teamOne:[], teamTwo:[]}
       
-        for(const setup of this.teamOne.setups){
-            for(const faction of Object.values(this.teamOne.factions)){
+        for(const faction of Object.keys(this.teamOne.factions)){
             var optionElement = document.createElement("option");
-            optionElement.value = faction[setup].faction
-            optionElement.innerHTML = faction[setup].initials
+            optionElement.value = faction
+            optionElement.innerHTML = facMap[faction]
             facOptions.teamOne.push(optionElement)
-            }
         }
-        for(const setup of this.teamTwo.setups){
-            for(const faction of Object.values(this.teamTwo.factions)){
+        
+        for(const faction of Object.keys(this.teamTwo.factions)){
             var optionElement = document.createElement("option");
-            optionElement.value = faction[setup].faction
-            optionElement.innerHTML = faction[setup].initials
+            optionElement.value = faction
+            optionElement.innerHTML = facMap[faction]
             facOptions.teamTwo.push(optionElement)
-            }
         }
         return facOptions
     }
