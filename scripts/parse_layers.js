@@ -26,7 +26,6 @@ var maps_dict = {
     "Fallujah":[],
     "Fool's Road":[],
     "Gorodok":[],
-    "Jensen's":[],
     "Kamdesh":[],
     "Kohat":[],
     "Kokan":[],

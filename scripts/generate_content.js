@@ -54,6 +54,7 @@ function generateContent(){
             layerDiv.appendChild(map_a);
             
 
+
             var flagsDiv = document.createElement('div');
             flagsDiv.className = 'map-card-flags';
 
@@ -61,7 +62,15 @@ function generateContent(){
             leftDiv.className = 'map-card-flag-left';
             var teamOneFlag = document.createElement('img');
             teamOneFlag.className = 'map-card-flag';
-            teamOneFlag.src = `img/icons/flag_${layer.teamOne.faction}.png`;
+
+            let teamOneFactions = Object.keys(layer.teamOne.factions)
+            if ( teamOneFactions.length > 1){
+                teamOneFlag.src = `img/icons/flag_undefined.png`;
+            }else{
+                let facInit = layer.teamOne.factions[teamOneFactions[0]]["STATIC"].initials
+                teamOneFlag.src = `img/icons/flag_${facInit}.png`;
+            }
+
             leftDiv.appendChild(teamOneFlag);;
             
 
@@ -69,7 +78,15 @@ function generateContent(){
             rightDiv.className = 'map-card-flag-right';
             var teamTwoFlag = document.createElement('img');
             teamTwoFlag.className = 'map-card-flag';
-            teamTwoFlag.src = `img/icons/flag_${layer.teamTwo.faction}.png`;
+
+            let teamTwoeFactions = Object.keys(layer.teamTwo.factions)
+            if ( teamTwoeFactions.length > 1){
+                teamTwoFlag.src = `img/icons/flag_undefined.png`;
+            }else{
+                let facInit = layer.teamTwo.factions[teamTwoeFactions[0]]["STATIC"].initials
+                teamTwoFlag.src = `img/icons/flag_${facInit}.png`;
+            }
+
             rightDiv.appendChild(teamTwoFlag);
 
             flagsDiv.appendChild(leftDiv);
