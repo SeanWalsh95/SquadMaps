@@ -14,9 +14,10 @@ const gmAbbv = {
      "Insurgency": "INS",
        "Invasion": "INV",
            "RAAS": "RAAS",
-       "Skirmish": "SKI",
+       "Skirmish": "SKMSH",
              "TA": "TA",
-             "TC": "TC"
+             "TC": "TC",
+          "Tanks": "Tanks"
 }
 
 var maps_dict = {
@@ -44,13 +45,13 @@ var maps_dict = {
 
 
 allianceMap = {
+    "Russian Ground Forces": "redfor",
+    "Insurgent Forces" : "independent",
     "Civilians": "independent",
-    "British Army": "blufor",
-    "Insurgent Forces" : "redfor",
     "Middle Eastern Alliance": "independent",
     "Irregular Militia Forces": "independent",
-    "Russian Ground Forces": "redfor",
     "United States Army": "blufor",
+    "British Army": "blufor",
     "Canadian Army": "blufor"
 }
 
@@ -87,10 +88,11 @@ class LoadoutContainer{
             if(setup in this.alliances[alliance]){
                 for(const facLookup of this.alliances[alliance][setup]){
                     let facLoadout = this.factions[facLookup]
-                    if (facLoadout.faction in loadouts)
+                    if (facLoadout.faction in loadouts) {
                         loadouts[facLoadout.faction][facLoadout.type] = facLoadout
-                    else
-                        loadouts[facLoadout.faction] = {[facLoadout.type]: facLoadout}
+                    } else {
+                        loadouts[facLoadout.faction] = {[facLoadout.type]: facLoadout }
+                    }
                 }
             }
         }

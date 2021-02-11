@@ -67,7 +67,7 @@ function generateContent(){
             if ( teamOneFactions.length > 1){
                 teamOneFlag.src = `img/icons/flag_undefined.png`;
             }else{
-                let facInit = layer.teamOne.factions[teamOneFactions[0]]["STATIC"].initials
+                let facInit =  facMap[teamOneFactions[0]];
                 teamOneFlag.src = `img/icons/flag_${facInit}.png`;
             }
 
@@ -83,7 +83,7 @@ function generateContent(){
             if ( teamTwoeFactions.length > 1){
                 teamTwoFlag.src = `img/icons/flag_undefined.png`;
             }else{
-                let facInit = layer.teamTwo.factions[teamTwoeFactions[0]]["STATIC"].initials
+                let facInit =  facMap[teamTwoeFactions[0]];
                 teamTwoFlag.src = `img/icons/flag_${facInit}.png`;
             }
 
