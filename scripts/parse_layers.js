@@ -26,6 +26,7 @@ var maps_dict = {
     "Chora":[],
     "Fallujah":[],
     "Fool's Road":[],
+    "Goose Bay": [],
     "Gorodok":[],
     "Kamdesh":[],
     "Kohat":[],
