@@ -48,7 +48,9 @@ section
 }
 section.map-section-links
 {
-	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	position: sticky;
 	z-index: 5;
 	top: 0;
