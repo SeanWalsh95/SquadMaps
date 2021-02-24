@@ -8,7 +8,7 @@ function scrollToId(id){
 function generateContent(){
     for( const [map, layers] of Object.entries(maps_dict) ){
 
-        var htmlMapID = "#"+map.toLowerCase().replaceAll(' ','_');
+        var htmlMapID = "#"+map.toLowerCase().replaceAll(/[' ]/g,'');
 
         var mapHeader = document.createElement('a');
         mapHeader.className = "headers";
