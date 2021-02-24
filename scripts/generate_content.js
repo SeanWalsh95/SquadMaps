@@ -1,5 +1,8 @@
 function scrollToId(id){
-    document.getElementById(id).scrollIntoView();
+    const yOffset = -50; 
+    const e = document.getElementById(id);
+    const eTop = e.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({top: eTop, behavior: 'smooth'})
 }
 
 function generateContent(){
