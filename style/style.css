@@ -52,7 +52,7 @@ section.map-section-links
 	flex-wrap: wrap;
 	justify-content: center;
 	position: sticky;
-	z-index: 5;
+	z-index: 3;
 	top: 0;
 	box-shadow: 0 0 16px black;
 }
@@ -141,7 +141,7 @@ section div.map-layer-card
 {
 	display: none;
 	position: fixed;
-	z-index: 3;
+	z-index: 10;
 	left: 0;
 	top: 0;
 	width: 100%;
