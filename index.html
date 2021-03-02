@@ -8,24 +8,45 @@
 	<meta name="description" content="SquadMaps: All maps and layers in Squad">
 	<meta name="keywords" content="Squad, Maps, Squad Maps, Maps Squad, Al Basrah, Basrah, Belaya, Chora, Fallujah, Fool's Road, Fools Road, Gorodok, Goro, Jensen's Range, Jensen's, Jensen, Kohat, Kohat Toi, Kokan, Logar Valley, Logar, Mestia, Narva, Op First Light, First Light, Sumari, Sumari Bala, Yehorivka, Yeho">
 	<link rel="shortcut icon" href="img/icons/favicon.ico">
+
 	<link rel="stylesheet" type="text/css" href="style/reset.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link rel="stylesheet" type="text/css" href="style/fonts.css">
+
+	<script src="lib/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="lib/dropdown/dropdown.min.css">
+	<script src="lib/dropdown/dropdown.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="lib/leaflet/css/leaflet.css">
-	<link href="https://fonts.googleapis.com/css?family=Anton|Roboto+Condensed:300,700" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="lib/leaflet/leaflet.js"></script>
-	<script src="scripts/mapLayerData.js"></script>
+
+	<script src="scripts/data/mapLayerData.js"></script>
 </head>
 
 <body>
 	<div class="top_links">
-		<p>Originally Created by <a href="https://squadmaps.com/">[ESPS] Napster653</a> with the help from [M] Kief and [ASC] LeventHAN <br>Adapted by <a href="https://github.com/SeanWalsh95/SquadMaps">@SeanWalsh95</a></p>
+		<p>Adapted from <a href="https://squadmaps.com/">Napster653</a>, Kief, LeventHAN<br>Map data From <a href="https://squad.gamepedia.com/Squad_Wiki">Squad Wiki</a></p>
 	</div>
 	<header>
 		<h1>SQUAD MAPS</h1>
 	</header>
 	<section class="map-section-links">
 	</section>
+	
+	<div class="filters">
+		<div class="faction-filter">
+			<select id="faction-filter-select" name="" multiple style="display: none;">
+				<option value="GB"  selected>British Army</option>
+				<option value="CAF" selected>Canadian Army</option>
+				<option value="INS" selected>Insurgent Forces</option>
+				<option value="MIL" selected>Irregular Militia Forces</option>
+				<option value="MEA" selected>Middle Eastern Alliance</option>
+				<option value="RUS" selected>Russian Ground Forces</option>
+				<option value="USA" selected>United States Army</option>
+			</select>
+		</div>
+	</div>
 	<div id="maps_container">
 
 	</div>
@@ -84,12 +105,13 @@
 		</div>
 	</div>
 	<script src="scripts/utils.js"></script>
-	<script src="scripts/vehicle_data.js"></script>
-	<script src="scripts/parse_layers.js"></script>
+	<script src="scripts/structure/consts.js"></script>
+	<script src="scripts/structure/layers.js"></script>
+	<script src="scripts/structure/vehicles.js"></script>
 	<script src="scripts/generate_content.js"></script>
 	<script src="scripts/layer_handler.js"></script>
 	<script src="scripts/interactive_map.js"></script>
-	<script src="scripts/get_layers.js"></script>
+	<script src="scripts/fetch_data.js"></script>
 	
 
 	<script>
@@ -110,6 +132,19 @@
 				team_2_ul.innerHTML = "";
 			}
 		}
+
+    $('.faction-filter').dropdown({
+        readOnly: false,
+        minCountErrorMessage: '',
+        limitCount: Infinity,
+        limitCountErrorMessage: '',
+        input: '<input type="text" maxLength="20" placeholder="Search...">',
+        data: [],
+        searchable: true,
+        searchNoData: '<li style="color:#ddd">No Results</li>',
+        choice: filterLayers
+
+    });
 	</script>
 
 </body>
