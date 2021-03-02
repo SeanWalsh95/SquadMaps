@@ -86,8 +86,8 @@ function getSelection(){
 	let t1LoadoutSelection = tOneLoadOpt.options[tOneLoadOpt.selectedIndex].value
 	let t2LoadoutSelection = tTwoLoadOpt.options[tTwoLoadOpt.selectedIndex].value
 
-	let teamOneFaction = layer.teamOne.factions[t1FactionSelection][t1LoadoutSelection] || null
-	let teamTwoFaction = layer.teamTwo.factions[t2FactionSelection][t2LoadoutSelection] || null
+	teamOneFaction = layer.teamOne.factions[t1FactionSelection][t1LoadoutSelection] || null
+	teamTwoFaction = layer.teamTwo.factions[t2FactionSelection][t2LoadoutSelection] || null
 
 	if(teamOneFaction && teamTwoFaction)
 		loadLayerMeta(layer ,teamOneFaction, teamTwoFaction)

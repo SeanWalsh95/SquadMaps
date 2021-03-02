@@ -1,3 +1,6 @@
+var teamOneFaction = null
+var teamTwoFaction = null
+
 const facMap = {
   "British Army": "GB",
   "Canadian Army": "CAF",
