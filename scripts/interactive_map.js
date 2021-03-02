@@ -92,7 +92,7 @@ function changeMap(layer){
     }
 
     if(!['RAAS'].includes(layer.gamemode)){
-      layerDriver.createLine({color:'white', weight: 2, opacity:0.95}).addTo(map);
+      layerDriver.createLine({color:'#585858', weight: 3, opacity:0.85}).addTo(map);
       map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
     }
 
