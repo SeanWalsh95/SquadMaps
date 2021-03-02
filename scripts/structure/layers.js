@@ -1,60 +1,3 @@
-const facMap = {
-               "British Army": "GB",
-              "Canadian Army": "CAF",
-           "Insurgent Forces": "INS",
-   "Irregular Militia Forces": "MIL",
-    "Middle Eastern Alliance": "MEA",
-      "Russian Ground Forces": "RUS",
-         "United States Army": "USA"
-}
-
-const gmAbbv = {
-            "AAS": "AAS",
-    "Destruction": "DES",
-     "Insurgency": "INS",
-       "Invasion": "INV",
-           "RAAS": "RAAS",
-       "Skirmish": "SKMSH",
-             "TA": "TA",
-             "TC": "TC",
-          "Tanks": "Tanks"
-}
-
-var maps_dict = {
-    "Al Basrah":[],
-    "Belaya":[],
-    "Chora":[],
-    "Fallujah":[],
-    "Fool's Road":[],
-    "Goose Bay": [],
-    "Gorodok":[],
-    "Kamdesh":[],
-    "Kohat":[],
-    "Kokan":[],
-    "Lashkar Valley":[],
-    "Logar":[],
-    "Manic":[],
-    "Mestia":[],
-    "Mutaha":[],
-    "Narva":[],
-    "Nanisivik":[],
-    "Skorpo":[],
-    "Sumari":[],
-    "Tallil":[],
-    "Yehorivka":[]
-};
-
-
-allianceMap = {
-    "Russian Ground Forces": "redfor",
-    "Insurgent Forces" : "independent",
-    "Civilians": "independent",
-    "Middle Eastern Alliance": "independent",
-    "Irregular Militia Forces": "independent",
-    "United States Army": "blufor",
-    "British Army": "blufor",
-    "Canadian Army": "blufor"
-}
 
 class LoadoutContainer{
     constructor(jsonData){
@@ -135,8 +78,9 @@ class SQLayer{
     constructor(jsonData){
         this.name = ignoreCaseSearch(jsonData,'name')
 
-        this.classname = this.name
-        this.classname = this.classname.toLowerCase().replaceAll(/ /g, '_').replaceAll(/[<>:'"\\\/\|\?\*]/g,'')
+        this.rawName = ignoreCaseSearch(jsonData,'rawName')
+
+        this.classname = this.rawName.toLowerCase()
 
         this.lighting = jsonData.lighting
 
@@ -144,6 +88,10 @@ class SQLayer{
         this.teamTwo = {}
 
         let teams = {"teamOne":ignoreCaseSearch(jsonData,'team1'),"teamTwo":ignoreCaseSearch(jsonData,'team2')}
+
+        for (const map in maps_dict)
+            if(this.name.match(map))
+                this.map = map
 
         for (const [team, data] of Object.entries(teams)){
             this[team] = {
@@ -171,6 +119,16 @@ class SQLayer{
             }
 
         }
+
+
+        var wikiImg = `${wikiURI}/images/${this.rawName}.jpg`
+        testUrl(wikiImg);
+        
+        this.image = wikiImg
+        //this.image = `img/maps/raw/${this.map.replaceAll(/ /g,'_')}.jpg`
+
+        this.thumbnail = `img/maps/thumbnails/${this.classname}.jpg`
+        
 
         this.flagCount = ignoreCaseSearch(jsonData,'CapturePoints')
         this.flags = this.classname in mapLayerFlagData ? mapLayerFlagData[this.classname] : ignoreCaseSearch(jsonData,'Flags');
@@ -217,12 +175,8 @@ var layerDict = {};
 
 function parseJsonData(){
     for(const layer of layersJson) {
-        for (const map in maps_dict) {
-            if(layer.name.match(map)){
-                layer.map = map
-                maps_dict[map].push(layer.classname);
-            }
-        }
+        if (layer.map in maps_dict)
+            maps_dict[layer.map].push(layer.classname);
         layerDict[layer.classname] = layer;
     }
 }
