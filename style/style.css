@@ -56,6 +56,9 @@ section.map-section-links
 	top: 0;
 	box-shadow: 0 0 16px black;
 }
+div.filters{
+	margin: 20px 50px;
+}
 section .headers
 {
 	color: #FFFFFF;

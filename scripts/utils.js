@@ -16,3 +16,15 @@ function optionsFromArray(arr){
   }
   return optList;
 }
+
+
+function testUrl(url){
+  try {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {};
+    xhttp.open("HEAD", url, true);
+    xhttp.send();
+  } catch (error) {
+    console.error(`No Image: ${url}`);
+  }
+}
