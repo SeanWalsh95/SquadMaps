@@ -30,7 +30,7 @@ class SquadMap {
       if(main)
         flagImg = main[1]
       else if(this.gamemode === "Invasion")
-        flagImg = this.tOne.tickets > this.tTwo.tickets ? this.tOne.faction : this.tTwo.faction;
+        flagImg = parseInt(this.tOne.tickets) > parseInt(this.tTwo.tickets) ? teamOneFaction.initials : teamTwoFaction.initials;
 
       let flagOpacity = flagImg==='Neutral' ? altOpacity : 1.0;
 
@@ -92,7 +92,7 @@ function changeMap(layer){
     }
 
     if(!['RAAS'].includes(layer.gamemode)){
-      layerDriver.createLine({color:'white', opacity:0.8}).addTo(map);
+      layerDriver.createLine({color:'white', weight: 2, opacity:0.95}).addTo(map);
       map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
     }
 
@@ -111,7 +111,7 @@ function changeMap(layer){
 
   }else{
 		let bounds = [[-200,-200],[200,200]];
-    L.imageOverlay(`img/maps/full_size/${layer.classname}.jpg`, bounds).addTo(map);
+    L.imageOverlay(layer.image, bounds).addTo(map);
     
     if (layer.classname in mapLayerBounds){
       map.fitBounds(mapLayerBounds[layer.classname]);
