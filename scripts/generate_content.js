@@ -6,19 +6,24 @@ function scrollToId(id){
 }
 
 function generateContent(){
-    for( const [map, layers] of Object.entries(maps_dict) ){
 
-        var htmlMapID = "#"+map.toLowerCase().replaceAll(/[' ]/g,'');
+    console.log(layerDict);
+
+    document.querySelector('.map-section-links').innerHTML = ""
+    document.querySelector('#maps_container').innerHTML = ""
+    for( const [map, layers] of Object.entries(maps_dict) ){
+        if(layers.length == 0 )
+            continue
+
+        var htmlMapID = `#${map.toLowerCase().replaceAll(/[' ]/g,'')}`;
 
         var mapHeader = document.createElement('a');
         mapHeader.className = "headers";
         mapHeader.textContent = map;
         mapHeader.href = `javascript:scrollToId('${htmlMapID}')`;
 
-        var headerContainer = document.getElementsByClassName('map-section-links')[0];
+        var headerContainer = document.querySelector('.map-section-links');
         headerContainer.appendChild(mapHeader);
-
-        var body =  document.body;
 
         var mapContainer = document.getElementById('maps_container');
         
@@ -50,7 +55,7 @@ function generateContent(){
 
             var map_img =  document.createElement('img');
             map_img.className = 'map-img';
-            map_img.src = `img/maps/thumbnails/${layer.classname}.jpg`;
+            map_img.src = layer.thumbnail;
             map_img.onerror = function(){this.src = 'img/maps/thumbnails/placeholder.jpg'};
 
             map_a.appendChild(map_img);
@@ -101,4 +106,32 @@ function generateContent(){
         }
         mapContainer.appendChild(mapSection);
     }
+
+}
+
+
+function filterLayers(){
+    for (const map in maps_dict){maps_dict[map] = [];}
+    for(const layer of layersJson) {
+        for (const map in maps_dict) {
+            let layerFactions = []
+            layerFactions = layerFactions.concat( Object.keys(layer.teamOne.factions) )
+            layerFactions = layerFactions.concat( Object.keys(layer.teamTwo.factions) )
+
+            let initialsList = Array.from(document.querySelectorAll('.dropdown-selected > i')).map(e=>{return e.getAttribute('data-id')})
+            let nameList = Array.from(document.querySelectorAll('.dropdown-selected')).map(e=>{return e.innerText})
+
+            let factionFilter = nameList.join(', ')
+
+            let hasFilter = layerFactions.some( (fac) => { return factionFilter.includes(fac) })
+
+            if(layer.name.match(map) && hasFilter  ){
+                layer.map = map
+                maps_dict[map].push(layer.classname);
+            }
+        }
+        layerDict[layer.classname] = layer;
+    }
+
+    generateContent()
 }
