@@ -12,51 +12,50 @@ const facMap = {
 }
 
 const gmAbbv = {
-"AAS": "AAS",
-"Destruction": "DES",
-"Insurgency": "INS",
-"Invasion": "INV",
-"RAAS": "RAAS",
-"Skirmish": "SKMSH",
-"TA": "TA",
-"TC": "TC",
-"Tanks": "Tanks"
+  "AAS": "AAS",
+  "Destruction": "DES",
+  "Insurgency": "INS",
+  "Invasion": "INV",
+  "RAAS": "RAAS",
+  "Skirmish": "SKMSH",
+  "TA": "TA",
+  "TC": "TC",
+  "Tanks": "Tanks"
 }
 
-const mapNames = [
-  "Al Basrah",
-  "Belaya",
-  "Chora",
-  "Fallujah",
-  "Fool's Road",
-  "Goose Bay",
-  "Gorodok",
-  "Kamdesh",
-  "Kohat",
-  "Kokan",
-  "Lashkar Valley",
-  "Logar",
-  "Manic",
-  "Mestia",
-  "Mutaha",
-  "Narva",
-  "Skorpo",
-  "Sumari",
-  "Tallil",
-  "Yehorivka"
-]
+const mapNames = {
+  "albasrah": "Al Basrah",
+  "belaya": "Belaya",
+  "chora": "Chora",
+  "fallujah": "Fallujah",
+  "fools": "Fool's Road",
+  "goosebay": "Goose Bay",
+  "gorodok": "Gorodok",
+  "kamdesh": "Kamdesh",
+  "kohat": "Kohat",
+  "kokan": "Kokan",
+  "lashkar": "Lashkar Valley",
+  "logar": "Logar Vally",
+  "manic": "Manic-5",
+  "mestia": "Mestia",
+  "mutaha": "Mutaha",
+  "narva": "Narva",
+  "skorpo": "Skorpo",
+  "sumari": "Sumari",
+  "tallil": "Tallil",
+  "yehorivka": "Yehorivka"
+}
 var maps_dict = {}
-for (const name of mapNames)
-  maps_dict[name] = []
-
+for (const [search, display] of Object.entries(mapNames))
+  maps_dict[search] = []
 
 const allianceMap = {
-"Russian Ground Forces": "redfor",
-"Insurgent Forces" : "independent",
-"Civilians": "independent",
-"Middle Eastern Alliance": "independent",
-"Irregular Militia Forces": "independent",
-"United States Army": "blufor",
-"British Army": "blufor",
-"Canadian Army": "blufor"
+  "Russian Ground Forces": "redfor",
+  "Insurgent Forces" : "independent",
+  "Civilians": "independent",
+  "Middle Eastern Alliance": "independent",
+  "Irregular Militia Forces": "independent",
+  "United States Army": "blufor",
+  "British Army": "blufor",
+  "Canadian Army": "blufor"
 }

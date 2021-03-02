@@ -1,5 +1,5 @@
 function scrollToId(id){
-    const yOffset = -50; 
+    const yOffset = -60; 
     const e = document.getElementById(id);
     const eTop = e.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({top: eTop, behavior: 'smooth'})
@@ -19,7 +19,7 @@ function generateContent(){
 
         var mapHeader = document.createElement('a');
         mapHeader.className = "headers";
-        mapHeader.textContent = map;
+        mapHeader.textContent = mapNames[map];
         mapHeader.href = `javascript:scrollToId('${htmlMapID}')`;
 
         var headerContainer = document.querySelector('.map-section-links');
@@ -31,7 +31,7 @@ function generateContent(){
         mapSection.id = htmlMapID;
         
         var mapSectionTitle = document.createElement('h2');
-        mapSectionTitle.textContent = map;
+        mapSectionTitle.textContent = mapNames[map];
 
         mapSection.appendChild(mapSectionTitle);
         

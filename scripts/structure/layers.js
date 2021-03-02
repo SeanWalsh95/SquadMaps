@@ -89,9 +89,9 @@ class SQLayer{
 
         let teams = {"teamOne":ignoreCaseSearch(jsonData,'team1'),"teamTwo":ignoreCaseSearch(jsonData,'team2')}
 
-        for (const map in maps_dict)
-            if(this.name.match(map))
-                this.map = map
+        for (const [mapSearch, mapDisplayname] of Object.entries(mapNames))
+            if(this.classname.match(mapSearch))
+                this.map = {id: mapSearch, name:mapDisplayname}
 
         for (const [team, data] of Object.entries(teams)){
             this[team] = {
@@ -173,10 +173,14 @@ var currLayerID = null;
 var map = null;
 var layerDict = {};
 
+var noMatch = [];
+
 function parseJsonData(){
     for(const layer of layersJson) {
-        if (layer.map in maps_dict)
-            maps_dict[layer.map].push(layer.classname);
+        if(layer.map && layer.map.id)
+            maps_dict[layer.map.id].push(layer.classname);
+        else
+            noMatch.push(layer)
         layerDict[layer.classname] = layer;
     }
 }
