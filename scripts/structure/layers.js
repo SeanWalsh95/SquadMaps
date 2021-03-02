@@ -120,10 +120,7 @@ class SQLayer{
 
         }
 
-
         var wikiImg = `${wikiURI}/images/${this.rawName}.jpg`
-        testUrl(wikiImg);
-        
         this.image = wikiImg
         //this.image = `img/maps/raw/${this.map.replaceAll(/ /g,'_')}.jpg`
 

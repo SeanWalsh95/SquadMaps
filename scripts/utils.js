@@ -17,6 +17,11 @@ function optionsFromArray(arr){
   return optList;
 }
 
+function testImages(){
+  for (const [layerID, layer] of Object.entries(layerDict)){
+    testUrl(layer.image)
+  }  
+}
 
 function testUrl(url){
   try {
