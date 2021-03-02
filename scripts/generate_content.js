@@ -7,7 +7,7 @@ function scrollToId(id){
 
 function generateContent(){
 
-    console.log(layerDict);
+    console.log(maps_dict)
 
     document.querySelector('.map-section-links').innerHTML = ""
     document.querySelector('#maps_container').innerHTML = ""
