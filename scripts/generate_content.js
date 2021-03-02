@@ -111,6 +111,9 @@ function generateContent(){
 
 
 function filterLayers(){
+
+    let slct = 'a > span > .dropdown-selected';
+
     for (const map in maps_dict){maps_dict[map] = [];}
     for(const layer of layersJson) {
         for (const map in maps_dict) {
@@ -118,14 +121,16 @@ function filterLayers(){
             layerFactions = layerFactions.concat( Object.keys(layer.teamOne.factions) )
             layerFactions = layerFactions.concat( Object.keys(layer.teamTwo.factions) )
 
-            let initialsList = Array.from(document.querySelectorAll('.dropdown-selected > i')).map(e=>{return e.getAttribute('data-id')})
-            let nameList = Array.from(document.querySelectorAll('.dropdown-selected')).map(e=>{return e.innerText})
+            let gameList = Array.from(document.querySelectorAll(`.gamemode-filter > ${slct} > i`)).map(e=>{return e.getAttribute('data-id')})
+            let nameList = Array.from(document.querySelectorAll(`.faction-filter > ${slct}`)).map(e=>{return e.innerText})
 
             let factionFilter = nameList.join(', ')
 
-            let hasFilter = layerFactions.some( (fac) => { return factionFilter.includes(fac) })
+            let hasFacFilter = layerFactions.some( (fac) => { return factionFilter.includes(fac) })
 
-            if(layer.name.match(map) && hasFilter  ){
+            let hasGameFilter = gameList.includes(layer.gamemode)
+
+            if(layer.classname.match(map) && hasFacFilter && hasGameFilter ){
                 layer.map = map
                 maps_dict[map].push(layer.classname);
             }

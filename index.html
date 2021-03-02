@@ -35,15 +35,27 @@
 	</section>
 	
 	<div class="filters">
-		<div class="faction-filter">
+		<div class="faction-filter filter">
 			<select id="faction-filter-select" name="" multiple style="display: none;">
-				<option value="GB"  selected>British Army</option>
-				<option value="CAF" selected>Canadian Army</option>
-				<option value="INS" selected>Insurgent Forces</option>
-				<option value="MIL" selected>Irregular Militia Forces</option>
-				<option value="MEA" selected>Middle Eastern Alliance</option>
-				<option value="RUS" selected>Russian Ground Forces</option>
-				<option value="USA" selected>United States Army</option>
+				<option selected value="GB" >British Army</option>
+				<option selected value="CAF">Canadian Army</option>
+				<option selected value="INS">Insurgent Forces</option>
+				<option selected value="MIL">Irregular Militia Forces</option>
+				<option selected value="MEA">Middle Eastern Alliance</option>
+				<option selected value="RUS">Russian Ground Forces</option>
+				<option selected value="USA">United States Army</option>
+			</select>
+		</div>
+		<div class="gamemode-filter filter">
+			<select id="gamemode-filter-select" name="" multiple style="display: none;">
+				<option selected value="AAS">Advance and Secure</option>
+				<option selected value="Destruction">Destruction</option>
+				<option selected value="Insurgency">Insurgency</option>
+				<option selected value="Invasion">Invasion</option>
+				<option selected value="Tanks">Tanks</option>
+				<option selected value="TA">Track Attack</option>
+				<option selected value="TC">Territory Control</option>
+				<option selected value="Skirmish">Skirmish</option>
 			</select>
 		</div>
 	</div>
@@ -134,6 +146,19 @@
 		}
 
     $('.faction-filter').dropdown({
+        readOnly: false,
+        minCountErrorMessage: '',
+        limitCount: Infinity,
+        limitCountErrorMessage: '',
+        input: '<input type="text" maxLength="20" placeholder="Search...">',
+        data: [],
+        searchable: true,
+        searchNoData: '<li style="color:#ddd">No Results</li>',
+        choice: filterLayers
+
+    });
+		
+    $('.gamemode-filter').dropdown({
         readOnly: false,
         minCountErrorMessage: '',
         limitCount: Infinity,

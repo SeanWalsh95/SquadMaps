@@ -56,7 +56,11 @@ section.map-section-links
 	top: 0;
 	box-shadow: 0 0 16px black;
 }
+div.filter{
+	width: 50%;
+}
 div.filters{
+	display: flex;
 	margin: 20px 50px;
 }
 section .headers
