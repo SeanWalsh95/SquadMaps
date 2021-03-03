@@ -7,8 +7,6 @@ function scrollToId(id){
 
 function generateContent(){
 
-    console.log(maps_dict)
-
     document.querySelector('.map-section-links').innerHTML = ""
     document.querySelector('#maps_container').innerHTML = ""
     for( const [map, layers] of Object.entries(maps_dict) ){

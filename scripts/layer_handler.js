@@ -29,8 +29,7 @@ function loadLayer(layerID){
 	changeMap(layerDict[layerID]);
 }
 
-function loadLayerInfo(layerID)
-{
+function loadLayerInfo(){
 	console.log( `${currLayerID}:`, layerDict[currLayerID]);
 
 	const layer = layerDict[currLayerID];

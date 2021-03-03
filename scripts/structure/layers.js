@@ -164,20 +164,3 @@ class SQLayer{
         return facOptions
     }
 }
-
-
-var currLayerID = null;
-var map = null;
-var layerDict = {};
-
-var noMatch = [];
-
-function parseJsonData(){
-    for(const layer of layersJson) {
-        if(layer.map && layer.map.id)
-            maps_dict[layer.map.id].push(layer.classname);
-        else
-            noMatch.push(layer)
-        layerDict[layer.classname] = layer;
-    }
-}

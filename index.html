@@ -117,17 +117,17 @@
 			</div>
 		</div>
 	</div>
-	<script src="scripts/utils.js"></script>
-	<script src="scripts/structure/consts.js"></script>
-	<script src="scripts/structure/layers.js"></script>
+	<script src="scripts/structure/globals.js"></script>
 	<script src="scripts/structure/vehicles.js"></script>
+	<script src="scripts/structure/layers.js"></script>
+	<script src="scripts/utils.js"></script>
 	<script src="scripts/generate_content.js"></script>
 	<script src="scripts/layer_handler.js"></script>
 	<script src="scripts/interactive_map.js"></script>
-	<script src="scripts/fetch_data.js"></script>
 	
-
 	<script>
+		fetchMapData(render=true);
+
 		// Handles modals related to this page
 		window.onclick = function (event)
 		{
@@ -153,7 +153,7 @@
         limitCountErrorMessage: '',
         input: '<input type="text" maxLength="20" placeholder="Search...">',
         data: [],
-        searchable: true,
+        searchable: false,
         searchNoData: '<li style="color:#ddd">No Results</li>',
         choice: filterLayers
 
@@ -166,11 +166,12 @@
         limitCountErrorMessage: '',
         input: '<input type="text" maxLength="20" placeholder="Search...">',
         data: [],
-        searchable: true,
+        searchable: false,
         searchNoData: '<li style="color:#ddd">No Results</li>',
         choice: filterLayers
 
     });
+		
 	</script>
 
 </body>

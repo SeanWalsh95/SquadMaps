@@ -1,5 +1,17 @@
 var teamOneFaction = null
 var teamTwoFaction = null
+var factionLoadouts = {};
+var layersJson = [];
+
+var currLayerID = null;
+var map = null;
+var layerDict = {};
+
+var noMatch = [];
+
+//const wikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/dev/completed_output/2.0'
+const wikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/dev/completed_output/_Current%20Version'
+
 
 const facMap = {
   "British Army": "GB",

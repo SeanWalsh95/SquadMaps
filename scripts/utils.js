@@ -1,4 +1,25 @@
 
+
+function fetchMapData(render=false){
+  $.getJSON(`${wikiURI}/finished.json`).then( (data)=>{
+    factionLoadouts = new LoadoutContainer(data['Setups'])
+    layersJson = data['Maps'].map( (layerData)=>{  return new SQLayer(layerData) } );
+    parseJsonData();
+    if(render)
+      generateContent();
+  });
+}
+
+function parseJsonData(){
+  for(const layer of layersJson) {
+      if(layer.map && layer.map.id)
+          maps_dict[layer.map.id].push(layer.classname);
+      else
+          noMatch.push(layer)
+      layerDict[layer.classname] = layer;
+  }
+}
+
 function ignoreCaseSearch(obj, search){
   return obj[Object.keys(obj).find(key => key.toLowerCase() === search.toLowerCase())] || null;
 }
