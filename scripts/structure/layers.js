@@ -62,11 +62,11 @@ class FactionLoadout{
         if (this.vehicles){
             let vicLookup = {}
             for (const vicData of this.vehicles){
-                let classname = ignoreCaseSearch(vicData,'rawType')
-                if(classname in vicLookup)
-                    vicLookup[classname].quantity++
+                let name = ignoreCaseSearch(vicData,'type')
+                if(name in vicLookup)
+                    vicLookup[name].quantity++
                 else
-                    vicLookup[classname] = new SQVehicle(vicData)
+                    vicLookup[name] = new SQVehicle(vicData)
             }
             this.vehicles = Object.values(vicLookup)
         }
