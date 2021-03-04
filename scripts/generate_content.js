@@ -123,7 +123,12 @@ function filterLayers(){
             let hasFacFilter = layerFactions.some( (fac) => { return nameList.includes(fac) })
             let hasGameFilter = gameList.includes(layer.gamemode)
 
-            if(layer.classname.match(map) && hasFacFilter && hasGameFilter ){
+            let search = document.querySelector('#layersearch').value
+            let searchMatch = true;
+            if (search)
+                searchMatch = JSON.stringify(layer).toLocaleLowerCase().match(search.toLowerCase())
+
+            if(layer.classname.match(map) && hasFacFilter && hasGameFilter && searchMatch){
                 layer.map = map
                 maps_dict[map].push(layer.classname);
             }
