@@ -1,10 +1,6 @@
 
 var modal = document.getElementById("modal_background")
 
-function openNewTab(uri){
-	window.open(uri, "_blank");
-}
-
 //sort by delay and name
 function sortVehicleList(list){
 	if(!list) return 0;
@@ -18,12 +14,9 @@ function sortVehicleList(list){
 	})
 }
 
-function openInNewTab(url) {
-  var win = window.open(url, '_blank');
-  win.focus();
-}
-
 function loadLayer(layerID){
+	modal.style.display = "block";
+
 	currLayerID = layerID;
 	loadLayerInfo(layerID);
 	changeMap(layerDict[layerID]);
@@ -85,20 +78,20 @@ function getSelection(){
 	let t1LoadoutSelection = tOneLoadOpt.options[tOneLoadOpt.selectedIndex].value
 	let t2LoadoutSelection = tTwoLoadOpt.options[tTwoLoadOpt.selectedIndex].value
 
-	teamOneFaction = layer.teamOne.factions[t1FactionSelection][t1LoadoutSelection] || null
-	teamTwoFaction = layer.teamTwo.factions[t2FactionSelection][t2LoadoutSelection] || null
+	console.log(`${t1FactionSelection}#${t1LoadoutSelection}`);
+	console.log(`${t2FactionSelection}#${t2LoadoutSelection}`);
 
-	if(teamOneFaction && teamTwoFaction)
-		loadLayerMeta(layer ,teamOneFaction, teamTwoFaction)
+	teamOneLoadout = layer.teamOne.loadouts[`${t1FactionSelection}#${t1LoadoutSelection}`] || null
+	teamTwoLoadout = layer.teamTwo.loadouts[`${t2FactionSelection}#${t2LoadoutSelection}`] || null
+
+	if(teamOneLoadout && teamTwoLoadout)
+		loadLayerMeta(layer ,teamOneLoadout, teamTwoLoadout)
 }
 
-function loadLayerMeta(layer, teamOneFaction, teamTwoFaction){
+function loadLayerMeta(layer, teamOneLoadout, teamTwoLoadout){
 
 	let t1List = document.getElementById("team_1_vehicles");
 	let t2List = document.getElementById("team_2_vehicles");
-
-	//document.getElementById("team_1_name").innerHTML = teamOneFaction.initials;
-	//document.getElementById("team_2_name").innerHTML = teamTwoFaction.initials;
 
 	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets}`;
 	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets}`;
@@ -111,20 +104,19 @@ function loadLayerMeta(layer, teamOneFaction, teamTwoFaction){
 	document.getElementById("value_weather").innerHTML = layer.lighting;
 	document.getElementById("value_number_of_flags").innerHTML = layer.flagCount ;
 
-
-	document.getElementById("team_1_flag").src = teamOneFaction ? `img/icons/flag_${teamOneFaction.initials}.png` : `img/icons/flag_undefined.png`
-	document.getElementById("team_2_flag").src = teamTwoFaction ? `img/icons/flag_${teamTwoFaction.initials}.png` : `img/icons/flag_undefined.png`
+	document.getElementById("team_1_flag").src = teamOneLoadout ? `img/icons/flag_${teamOneLoadout.faction.initials}.png` : `img/icons/flag_undefined.png`
+	document.getElementById("team_2_flag").src = teamTwoLoadout ? `img/icons/flag_${teamTwoLoadout.faction.initials}.png` : `img/icons/flag_undefined.png`
 	
-	if(teamOneFaction){
+	if(teamOneLoadout){
 		document.querySelector('#team_1_vehicles').innerHTML = "";
-		sortVehicleList(teamOneFaction.vehicles, 'name');
-		teamOneFaction.vehicles.forEach(vehicle =>{ t1List.appendChild(vehicle.genListItemElement()); });
+		sortVehicleList(teamOneLoadout.vehicles, 'name');
+		teamOneLoadout.vehicles.forEach(vehicle =>{ t1List.appendChild(vehicle.genListItemElement()); });
 	}
 
-	if(teamTwoFaction){
+	if(teamTwoLoadout){
 		document.querySelector('#team_2_vehicles').innerHTML = "";
-		sortVehicleList(teamTwoFaction.vehicles, 'name');
-		teamTwoFaction.vehicles.forEach(vehicle => { t2List.appendChild(vehicle.genListItemElement()); });
+		sortVehicleList(teamTwoLoadout.vehicles, 'name');
+		teamTwoLoadout.vehicles.forEach(vehicle => { t2List.appendChild(vehicle.genListItemElement()); });
 	}
 	
 	modal.style.display = "block";

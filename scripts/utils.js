@@ -1,7 +1,7 @@
 
 
 function fetchMapData(render=false){
-  $.getJSON(`${wikiURI}/finished.json`).then( (data)=>{
+  $.getJSON(`${gitWikiURI}/finished.json`).then( (data)=>{
     factionLoadouts = new LoadoutContainer(data['Setups'])
     layersJson = data['Maps'].map( (layerData)=>{  return new SQLayer(layerData) } );
     parseJsonData();
@@ -42,6 +42,15 @@ function testImages(){
   for (const [layerID, layer] of Object.entries(layerDict)){
     testUrl(layer.image)
   }  
+}
+
+function openNewTab(uri){
+	window.open(uri, "_blank");
+}
+
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
 }
 
 function testUrl(url){

@@ -69,11 +69,11 @@ function generateContent(){
             var teamOneFlag = document.createElement('img');
             teamOneFlag.className = 'map-card-flag';
 
-            let teamOneFactions = Object.keys(layer.teamOne.factions)
-            if ( teamOneFactions.length > 1){
+            let teamOneLoadouts = Object.keys(layer.teamOne.loadouts)
+            if ( teamOneLoadouts.length > 1){
                 teamOneFlag.src = `img/icons/flag_undefined.png`;
             }else{
-                let facInit =  facMap[teamOneFactions[0]];
+                let facInit = layer.teamOne.loadouts[teamOneLoadouts[0]].faction.initials;
                 teamOneFlag.src = `img/icons/flag_${facInit}.png`;
             }
 
@@ -84,12 +84,12 @@ function generateContent(){
             rightDiv.className = 'map-card-flag-right';
             var teamTwoFlag = document.createElement('img');
             teamTwoFlag.className = 'map-card-flag';
-
-            let teamTwoeFactions = Object.keys(layer.teamTwo.factions)
-            if ( teamTwoeFactions.length > 1){
+            
+            let teamTwoLoadouts = Object.keys(layer.teamTwo.loadouts)
+            if ( teamTwoLoadouts.length > 1){
                 teamTwoFlag.src = `img/icons/flag_undefined.png`;
             }else{
-                let facInit =  facMap[teamTwoeFactions[0]];
+                let facInit = layer.teamTwo.loadouts[teamTwoLoadouts[0]].faction.initials;
                 teamTwoFlag.src = `img/icons/flag_${facInit}.png`;
             }
 

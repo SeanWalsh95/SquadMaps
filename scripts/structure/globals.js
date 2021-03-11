@@ -1,5 +1,6 @@
-var teamOneFaction = null
-var teamTwoFaction = null
+var teamOneLoadout = null
+var teamOneLoadout = null
+
 var factionLoadouts = {};
 var layersJson = [];
 
@@ -9,18 +10,80 @@ var layerDict = {};
 
 var noMatch = [];
 
-//const wikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/dev/completed_output/2.0'
-const wikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/dev/completed_output/_Current%20Version'
+const gitWikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/dev/completed_output/_Current%20Version'
+const cdnWikiURI = 'https://cdn.jsdelivr.net/gh/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data@dev/completed_output/_Current%20Version'
 
+
+const allianceEnum = {
+       REDFOR: "REDFOR",
+      BLUEFOR: "BLUEFOR",
+  INDEPENDENT: "INDEPENDENT"
+}
+Object.freeze(allianceEnum);
+
+const factionEnum = Object.freeze({
+   GB: {
+     initials:"GB",
+     name:"British Army",
+     alliance: allianceEnum.BLUEFOR
+  },
+  CAF: {
+    initials:"CAF",
+    name:"Canadian Army",
+    alliance: allianceEnum.BLUEFOR
+  },
+  CIV: {
+    initials:"CIV",
+    name:"Civilians",
+    alliance: allianceEnum.BLUEFOR
+  },
+  INS: {
+    initials:"INS",
+    name:"Insurgent Forces",
+    alliance: allianceEnum.INDEPENDENT
+  },
+  MIL: {
+    initials:"MIL",
+    name:"Irregular Militia Forces",
+    alliance: allianceEnum.INDEPENDENT
+  },
+  MEA: {
+    initials:"MEA",
+    name:"Middle Eastern Alliance",
+    alliance: allianceEnum.INDEPENDENT
+  },
+  RUS: {
+    initials:"RUS",
+    name:"Russian Ground Forces",
+    alliance: allianceEnum.REDFOR
+  },
+  USA: {
+    initials:"USA",
+    name:"United States Army",
+    alliance: allianceEnum.BLUEFOR
+  }
+});
+
+function facMatch(searchStr){
+  for(const facEnum of Object.values(factionEnum)){
+    if(facEnum.name.toLowerCase().match(searchStr.toLowerCase()))
+      return facEnum
+    if(facEnum.initials === searchStr)
+      return facEnum
+  }
+
+  console.log(`No Faction found for: ${searchStr}`)
+  return null
+}
 
 const facMap = {
-  "British Army": "GB",
-  "Canadian Army": "CAF",
-  "Insurgent Forces": "INS",
-  "Irregular Militia Forces": "MIL",
-  "Middle Eastern Alliance": "MEA",
-  "Russian Ground Forces": "RUS",
-  "United States Army": "USA"
+  "British Army": factionEnum.GB,
+  "Canadian Army": factionEnum.CAF,
+  "Insurgent Forces": factionEnum.INS,
+  "Irregular Militia Forces": factionEnum.MIL,
+  "Middle Eastern Alliance": factionEnum.MEA,
+  "Russian Ground Forces": factionEnum.RUS,
+  "United States Army": factionEnum.USA
 }
 
 const gmAbbv = {
@@ -60,14 +123,3 @@ const mapNames = {
 var maps_dict = {}
 for (const [search, display] of Object.entries(mapNames))
   maps_dict[search] = []
-
-const allianceMap = {
-  "Russian Ground Forces": "redfor",
-  "Insurgent Forces" : "independent",
-  "Civilians": "independent",
-  "Middle Eastern Alliance": "independent",
-  "Irregular Militia Forces": "independent",
-  "United States Army": "blufor",
-  "British Army": "blufor",
-  "Canadian Army": "blufor"
-}

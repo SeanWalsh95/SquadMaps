@@ -30,7 +30,7 @@ class SquadMap {
       if(main)
         flagImg = main[1]
       else if(this.gamemode === "Invasion")
-        flagImg = parseInt(this.tOne.tickets) > parseInt(this.tTwo.tickets) ? teamOneFaction.initials : teamTwoFaction.initials;
+        flagImg = parseInt(this.tOne.tickets) > parseInt(this.tTwo.tickets) ? teamOneLoadout.faction.initials : teamTwoLoadout.faction.initials;
 
       let flagOpacity = flagImg==='Neutral' ? altOpacity : 1.0;
 
