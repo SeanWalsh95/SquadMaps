@@ -6,7 +6,6 @@ function scrollToId(id){
 }
 
 function generateContent(){
-
     document.querySelector('.map-section-links').innerHTML = ""
     document.querySelector('#maps_container').innerHTML = ""
     for( const [map, layers] of Object.entries(maps_dict) ){
@@ -42,7 +41,7 @@ function generateContent(){
             cardTitle.className = 'map-card-title';
             
             var layerH3 = document.createElement('h3');
-            layerH3.textContent = `${gmAbbv[layer.gamemode]} ${layer.version}`;
+            layerH3.textContent = `${layer.gamemode.abbr} ${layer.version}`;
             cardTitle.appendChild(layerH3);
 
             layerDiv.appendChild(cardTitle);
@@ -113,24 +112,29 @@ function filterLayers(){
     for (const map in maps_dict){maps_dict[map] = [];}
     for(const layer of layersJson) {
         for (const map in maps_dict) {
-            let layerFactions = []
-            layerFactions = layerFactions.concat( Object.keys(layer.teamOne.factions) )
-            layerFactions = layerFactions.concat( Object.keys(layer.teamTwo.factions) )
+            try{
+                let layerFactions = []
+                layerFactions = layerFactions.concat( Object.values(layer.teamOne.loadouts).map(l => l.faction.name) )
+                layerFactions = layerFactions.concat( Object.values(layer.teamTwo.loadouts).map(l => l.faction.name) )
 
-            let gameList = Array.from(document.querySelectorAll(`.gamemode-filter > a > span > .dropdown-selected > i`)).map(e=>{return e.getAttribute('data-id')})
-            let nameList = Array.from(document.querySelectorAll(`.faction-filter > a > span > .dropdown-selected`)).map(e=>{return e.innerText})
+                let gameList = Array.from(document.querySelectorAll(`.gamemode-filter > a > span > .dropdown-selected > i`)).map(e=>{return e.getAttribute('data-id')})
+                let nameList = Array.from(document.querySelectorAll(`.faction-filter > a > span > .dropdown-selected`)).map(e=>{return e.innerText})
 
-            let hasFacFilter = layerFactions.some( (fac) => { return nameList.includes(fac) })
-            let hasGameFilter = gameList.includes(layer.gamemode)
+                let hasFacFilter = layerFactions.some( (fac) => { return nameList.includes(fac) })
+                if (!layer.gamemode.abbr) continue;
+                let hasGameFilter = gameList.includes(layer.gamemode.abbr)
 
-            let search = document.querySelector('#layersearch').value
-            let searchMatch = true;
-            if (search)
-                searchMatch = JSON.stringify(layer).toLocaleLowerCase().match(search.toLowerCase())
+                let search = document.querySelector('#layersearch').value
+                let searchMatch = true;
+                if (search)
+                    searchMatch = JSON.stringify(layer).toLocaleLowerCase().match(search.toLowerCase())
 
-            if(layer.classname.match(map) && hasFacFilter && hasGameFilter && searchMatch){
-                layer.map = map
-                maps_dict[map].push(layer.classname);
+                if(layer.classname.match(map) && hasFacFilter && hasGameFilter && searchMatch){
+                    layer.map = map
+                    maps_dict[map].push(layer.classname);
+                }
+            } catch (e) {
+                console.log(`Filter Error: Layer${layer.classname}`,e)
             }
         }
     }

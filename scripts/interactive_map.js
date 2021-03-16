@@ -13,7 +13,7 @@ class SquadMap {
     this.flagDict = this.id in mapLayerFlagData ? mapLayerFlagData[this.id] : null;
     this.tOne = layerData.teamOne;
     this.tTwo = layerData.teamTwo;
-    this.gamemode = layerData.gamemode;
+    this.gamemode = layerData.gamemode.value;
   }
 
   getImageOverlay(){
@@ -91,13 +91,13 @@ function changeMap(layer){
       mapBorder.addTo(map);
     }
 
-    if(!['RAAS'].includes(layer.gamemode)){
+    if(!['RAAS'].includes(layer.gamemode.value)){
       layerDriver.createLine({color:'#585858', weight: 3, opacity:0.85}).addTo(map);
       map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
     }
 
     map.on('resize', function(e) {
-      if(markerGroup !== null && !['RAAS'].includes(layer.gamemode))
+      if(markerGroup !== null && !['RAAS'].includes(layer.gamemode.value))
         map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
       else
         map.fitWorld({reset: true});

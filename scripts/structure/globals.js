@@ -14,12 +14,11 @@ const gitWikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad
 const cdnWikiURI = 'https://cdn.jsdelivr.net/gh/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data@dev/completed_output/_Current%20Version'
 
 
-const allianceEnum = {
+const allianceEnum = Object.freeze({
        REDFOR: "REDFOR",
       BLUEFOR: "BLUEFOR",
   INDEPENDENT: "INDEPENDENT"
-}
-Object.freeze(allianceEnum);
+});
 
 const factionEnum = Object.freeze({
    GB: {
@@ -63,6 +62,75 @@ const factionEnum = Object.freeze({
     alliance: allianceEnum.BLUEFOR
   }
 });
+
+const gamemodeEnum = Object.freeze({
+  AAS: {
+    value: "AAS",
+    name : "Advance and Secure",
+    abbr: "AAS"
+  } ,
+  Destruction: {
+    value: "Destruction",
+    name : "Destruction",
+    abbr: "DES"
+  },
+  Insurgency: {
+    value: "Insurgency",
+    name : "Insurgency",
+    abbr: "INS"
+  },
+  Invasion: {
+    value: "Invasion",
+    name : "Invasion",
+    abbr: "INV"
+  },
+  RAAS: {
+    value: "RAAS",
+    name : "Advance and Secure (Random)",
+    abbr: "RAAS"
+  },
+  Skirmish: {
+    value: "Skirmish",
+    name : "Skirmish",
+    abbr: "SKMSH"
+  },
+  TA: {
+    value: "TA",
+    name : "Track Attack",
+    abbr: "TA"
+  },
+  Tanks: {
+    value: "Tanks",
+    name : "Tanks",
+    abbr: "Tanks"
+  },
+  TC: {
+    value: "TC",
+    name : "Territory Control",
+    abbr: "TC"
+  },
+  Training:{
+    value: "Training",
+    name : "Training",
+    abbr: "Training"
+  },
+  Tutorial:{
+    value: "Tutorial",
+    name : "Tutorial",
+    abbr: "Tutorial"
+  }
+});
+
+
+function enumMatch(enumType, search){
+  for(const [enumKey, enumObj] of Object.entries(enumType)){
+    if (search.toLowerCase() === enumKey.toLowerCase())
+      return enumObj
+  }
+
+  console.log(`Search: ${search} not found in Enum`, enumType)
+  return null
+}
 
 function facMatch(searchStr){
   for(const facEnum of Object.values(factionEnum)){

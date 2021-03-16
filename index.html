@@ -40,26 +40,10 @@
 	<div class="filters">
 		<div class="faction-filter filter">
 			<select id="faction-filter-select" name="" multiple style="display: none;">
-				<option selected value="GB" >British Army</option>
-				<option selected value="CAF">Canadian Army</option>
-				<option selected value="INS">Insurgent Forces</option>
-				<option selected value="MIL">Irregular Militia Forces</option>
-				<option selected value="MEA">Middle Eastern Alliance</option>
-				<option selected value="RUS">Russian Ground Forces</option>
-				<option selected value="USA">United States Army</option>
 			</select>
 		</div>
 		<div class="gamemode-filter filter">
 			<select id="gamemode-filter-select" name="" multiple style="display: none;">
-				<option selected value="AAS">Advance and Secure</option>
-				<option selected value="RAAS">Advance and Secure (Random)</option>
-				<option selected value="Destruction">Destruction</option>
-				<option selected value="Insurgency">Insurgency</option>
-				<option selected value="Invasion">Invasion</option>
-				<option selected value="Tanks">Tanks</option>
-				<option selected value="TA">Track Attack</option>
-				<option selected value="TC">Territory Control</option>
-				<option selected value="Skirmish">Skirmish</option>
 			</select>
 		</div>
 	</div>
@@ -149,26 +133,28 @@
 			}
 		}
 
+		const facData = Object.values(factionEnum).map((f)=> { return {selected:true, name:f.name, id:f.initials}})
     $('.faction-filter').dropdown({
         readOnly: false,
         minCountErrorMessage: '',
         limitCount: Infinity,
         limitCountErrorMessage: '',
         input: '<input type="text" maxLength="20" placeholder="Search...">',
-        data: [],
+        data: facData,
         searchable: false,
         searchNoData: '<li style="color:#ddd">No Results</li>',
         choice: filterLayers
 
     });
 		
+		const gmData = Object.values(gamemodeEnum).map((g)=> { return {selected:true, name:g.name, id:g.abbr}})
     $('.gamemode-filter').dropdown({
         readOnly: false,
         minCountErrorMessage: '',
         limitCount: Infinity,
         limitCountErrorMessage: '',
         input: '<input type="text" maxLength="20" placeholder="Search...">',
-        data: [],
+        data: gmData,
         searchable: false,
         searchNoData: '<li style="color:#ddd">No Results</li>',
         choice: filterLayers

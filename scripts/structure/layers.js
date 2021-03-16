@@ -114,12 +114,13 @@ class SQLayer{
         this.flagCount = ignoreCaseSearch(jsonData,'CapturePoints')
         this.flags = this.classname in mapLayerFlagData ? mapLayerFlagData[this.classname] : ignoreCaseSearch(jsonData,'Flags');
 
-        let mGame = this.name.match(/(?<gamemode>\w+)(?=(?:$|\s+[vV]))/);
-        let mVersion = this.name.match(/(?<=[vV])(?<version>\d+)/) || ['1'];
+        let gmMatch = this.name.match(/(?<gamemode>\w+)(?=(?:$|\s+[vV](?<version>\d+)))/);
 
-        this.gamemode = ignoreCaseSearch(jsonData,'gamemode') || mGame[0]
-        this.version =  ignoreCaseSearch(jsonData,'layerVersion') || mVersion[0];
+        this.gamemode = ignoreCaseSearch(jsonData,'gamemode') || gmMatch.groups.gamemode || "Unknown"
+        this.version =  ignoreCaseSearch(jsonData,'layerVersion') || gmMatch.groups.version || "1"
         this.version = this.version.replace(/[vV]/,'')
+
+        this.gamemode = enumMatch(gamemodeEnum, this.gamemode)
     }
 
     genLoadoutOptionElements(){
