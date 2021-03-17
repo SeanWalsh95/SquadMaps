@@ -144,27 +144,6 @@ function facMatch(searchStr){
   return null
 }
 
-const facMap = {
-  "British Army": factionEnum.GB,
-  "Canadian Army": factionEnum.CAF,
-  "Insurgent Forces": factionEnum.INS,
-  "Irregular Militia Forces": factionEnum.MIL,
-  "Middle Eastern Alliance": factionEnum.MEA,
-  "Russian Ground Forces": factionEnum.RUS,
-  "United States Army": factionEnum.USA
-}
-
-const gmAbbv = {
-  "AAS": "AAS",
-  "Destruction": "DES",
-  "Insurgency": "INS",
-  "Invasion": "INV",
-  "RAAS": "RAAS",
-  "Skirmish": "SKMSH",
-  "TA": "TA",
-  "TC": "TC",
-  "Tanks": "Tanks"
-}
 
 const mapNames = {
   "albasrah": "Al Basrah",
@@ -174,6 +153,7 @@ const mapNames = {
   "fools": "Fool's Road",
   "goosebay": "Goose Bay",
   "gorodok": "Gorodok",
+  /*"jensensrange": "Jensen's Range",*/
   "kamdesh": "Kamdesh",
   "kohat": "Kohat",
   "kokan": "Kokan",
@@ -189,5 +169,5 @@ const mapNames = {
   "yehorivka": "Yehorivka"
 }
 var maps_dict = {}
-for (const [search, display] of Object.entries(mapNames))
+for (const search of Object.keys(mapNames))
   maps_dict[search] = []
