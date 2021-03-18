@@ -3,7 +3,15 @@
 function fetchMapData(render=false){
   $.getJSON(`${gitWikiURI}/finished.json`).then( (data)=>{
     factionLoadouts = new LoadoutContainer(data['Setups'])
-    layersJson = data['Maps'].map( (layerData)=>{  return new SQLayer(layerData) } );
+    layersJson = []
+    for (const layerData of data['Maps']){
+      layerObj = null;
+      try{
+        layersJson.push(new SQLayer(layerData));
+      }catch (err){
+        console.log(`Error Parsing Layer "${ignoreCaseSearch(layerData,'rawName')}"`, err);
+      }
+    }
     parseJsonData();
     if(render)
       generateContent();

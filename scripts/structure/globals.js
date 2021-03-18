@@ -15,12 +15,14 @@ const cdnWikiURI = 'https://cdn.jsdelivr.net/gh/Squad-Wiki-Editorial/squad-wiki-
 
 
 const allianceEnum = Object.freeze({
+       __TYPE: "alliance",
        REDFOR: "REDFOR",
       BLUEFOR: "BLUEFOR",
   INDEPENDENT: "INDEPENDENT"
 });
 
 const factionEnum = Object.freeze({
+  __TYPE: "faction",
    GB: {
      initials:"GB",
      name:"British Army",
@@ -64,6 +66,7 @@ const factionEnum = Object.freeze({
 });
 
 const gamemodeEnum = Object.freeze({
+  __TYPE: "gamemode",
   AAS: {
     value: "AAS",
     name : "Advance and Secure",
@@ -127,21 +130,18 @@ function enumMatch(enumType, search){
     if (search.toLowerCase() === enumKey.toLowerCase())
       return enumObj
   }
-
-  console.log(`Search: ${search} not found in Enum`, enumType)
-  return null
+  throw new Error(`Search: ${search} not found in Enum ${enumType.__TYPE}`)
 }
 
 function facMatch(searchStr){
   for(const facEnum of Object.values(factionEnum)){
+    if(!facEnum.name) continue;
     if(facEnum.name.toLowerCase().match(searchStr.toLowerCase()))
       return facEnum
     if(facEnum.initials === searchStr)
       return facEnum
   }
-
-  console.log(`No Faction found for: ${searchStr}`)
-  return null
+  throw new Error(`Search: ${searchStr} not found in Enum faction`)
 }
 
 
@@ -153,7 +153,7 @@ const mapNames = {
   "fools": "Fool's Road",
   "goosebay": "Goose Bay",
   "gorodok": "Gorodok",
-  /*"jensensrange": "Jensen's Range",*/
+  "jensen": "Jensen's Range",
   "kamdesh": "Kamdesh",
   "kohat": "Kohat",
   "kokan": "Kokan",
