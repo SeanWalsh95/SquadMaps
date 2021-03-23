@@ -44,8 +44,8 @@ function loadLayerInfo(){
 	tTwoFacOpt.innerHTML = ""
 	facOptions[0].forEach(option => {tOneFacOpt.appendChild(option)})
 	facOptions[1].forEach(option => {tTwoFacOpt.appendChild(option)})
-	tOneFacOpt.addEventListener("change", getSelection)
-	tTwoFacOpt.addEventListener("change", getSelection)
+	tOneFacOpt.addEventListener("change", getLoadoutSelection)
+	tTwoFacOpt.addEventListener("change", getLoadoutSelection)
 	
 	let loadOptions = layer.genLoadoutOptionElements();
 	
@@ -56,13 +56,13 @@ function loadLayerInfo(){
 	tTwoLoadOpt.innerHTML = ""
 	loadOptions[0].forEach(option => {tOneLoadOpt.appendChild(option)})
 	loadOptions[1].forEach(option => {tTwoLoadOpt.appendChild(option)})
-	tOneLoadOpt.addEventListener("change", getSelection)
-	tTwoLoadOpt.addEventListener("change", getSelection)
-
-	getSelection()
+	tOneLoadOpt.addEventListener("change", getLoadoutSelection)
+	tTwoLoadOpt.addEventListener("change", getLoadoutSelection)
+	
+	getLoadoutSelection()
 }
 
-function getSelection(){
+function getLoadoutSelection(){
 	
 	const layer = layerDict[currLayerID];
 
