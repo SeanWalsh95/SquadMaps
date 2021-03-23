@@ -79,17 +79,16 @@ class SQLayer{
 
         this.lighting = jsonData.lighting
 
-        this.teamOne = {}
-        this.teamTwo = {}
+        this.teams = [{},{}];
 
-        let teams = {"teamOne":ignoreCaseSearch(jsonData,'team1'),"teamTwo":ignoreCaseSearch(jsonData,'team2')}
+        let teams = {0:ignoreCaseSearch(jsonData,'team1'),1:ignoreCaseSearch(jsonData,'team2')}
 
         for (const [mapSearch, mapDisplayname] of Object.entries(mapNames))
             if(this.classname.match(mapSearch))
                 this.map = {id: mapSearch, name:mapDisplayname}
 
         for (const [team, data] of Object.entries(teams)){
-            this[team] = {
+            this.teams[team] = {
                 alliances: ignoreCaseSearch(data,'allowedAlliances'),
                 setups: ignoreCaseSearch(data,'factionSetups'),
                 intel: ignoreCaseSearch(data,'intelOnEnemy'),
@@ -97,19 +96,19 @@ class SQLayer{
                 tickets: ignoreCaseSearch(data,'tickets')
             }
 
-            if (this[team].alliances){
+            if (this.teams[team].alliances){
                 let loadouts = {}
-                for(const alliance of this[team].alliances){
-                    loadouts = Object.assign(factions, factionLoadouts.getFactions(alliance, this[team].setups) )
+                for(const alliance of this.teams[team].alliances){
+                    loadouts = Object.assign(factions, factionLoadouts.getFactions(alliance, this.teams[team].setups) )
                 }
-                this[team].loadouts = loadouts
+                this.teams[team].loadouts = loadouts
             }else{
                 let staticLoadout = new FactionLoadout(data)
                 let teamVics = ignoreCaseSearch(data,'vehicles')
                 if (teamVics)
                     teamVics = teamVics.map( (vicData)=> {return new SQVehicle(vicData)})
-                this[team].loadouts = {[`${staticLoadout.faction.initials}#STATIC`]:staticLoadout}
-                this[team].setups = ["STATIC"]
+                this.teams[team].loadouts = {[`${staticLoadout.faction.initials}#STATIC`]:staticLoadout}
+                this.teams[team].setups = ["STATIC"]
             }
 
         }
@@ -135,26 +134,20 @@ class SQLayer{
 
     genLoadoutOptionElements(){
         return {
-            teamOne: optionsFromArray(this.teamOne.setups),
-            teamTwo: optionsFromArray(this.teamTwo.setups)
+            0: optionsFromArray(this.teams[0].setups),
+            1: optionsFromArray(this.teams[1].setups)
         }
     }
 
     genFactionOptionElements(){ 
-        var facOptions = {teamOne:[], teamTwo:[]}
-      
-        for(const loadout of Object.values(this.teamOne.loadouts)){
-            var optionElement = document.createElement("option");
-            optionElement.value = loadout.faction.initials
-            optionElement.innerHTML = loadout.faction.initials
-            facOptions.teamOne.push(optionElement)
-        }
-        
-        for(const loadout of Object.values(this.teamTwo.loadouts)){
-            var optionElement = document.createElement("option");
-            optionElement.value = loadout.faction.initials
-            optionElement.innerHTML = loadout.faction.initials
-            facOptions.teamTwo.push(optionElement)
+        var facOptions = {0:[], 1:[]}
+        for(const [teamNumber, teamData] of Object.entries(this.teams)){
+            for(const loadout of Object.values(teamData.loadouts)){
+                var optionElement = document.createElement("option");
+                optionElement.value = loadout.faction.initials
+                optionElement.innerHTML = loadout.faction.initials
+                facOptions[teamNumber].push(optionElement)
+            }
         }
         return facOptions
     }

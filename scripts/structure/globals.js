@@ -1,5 +1,5 @@
 var teamOneLoadout = null
-var teamOneLoadout = null
+var teamTwoLoadout = null
 
 var factionLoadouts = {};
 var layersJson = [];

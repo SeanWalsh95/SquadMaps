@@ -11,8 +11,8 @@ class SquadMap {
     this.id = layerData.classname;    
     this.mapName = layerData.map.name;
     this.flagDict = this.id in mapLayerFlagData ? mapLayerFlagData[this.id] : null;
-    this.tOne = layerData.teamOne;
-    this.tTwo = layerData.teamTwo;
+    this.tOne = layerData.teams[0];
+    this.tTwo = layerData.teams[1];
     this.gamemode = layerData.gamemode.value;
   }
 

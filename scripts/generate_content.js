@@ -68,11 +68,11 @@ function generateContent(){
             var teamOneFlag = document.createElement('img');
             teamOneFlag.className = 'map-card-flag';
 
-            let teamOneLoadouts = Object.keys(layer.teamOne.loadouts)
+            let teamOneLoadouts = Object.keys(layer.teams[0].loadouts)
             if ( teamOneLoadouts.length > 1){
                 teamOneFlag.src = `img/icons/flag_undefined.png`;
             }else{
-                let facInit = layer.teamOne.loadouts[teamOneLoadouts[0]].faction.initials;
+                let facInit = layer.teams[0].loadouts[teamOneLoadouts[0]].faction.initials;
                 teamOneFlag.src = `img/icons/flag_${facInit}.png`;
             }
 
@@ -84,11 +84,11 @@ function generateContent(){
             var teamTwoFlag = document.createElement('img');
             teamTwoFlag.className = 'map-card-flag';
             
-            let teamTwoLoadouts = Object.keys(layer.teamTwo.loadouts)
+            let teamTwoLoadouts = Object.keys(layer.teams[1].loadouts)
             if ( teamTwoLoadouts.length > 1){
                 teamTwoFlag.src = `img/icons/flag_undefined.png`;
             }else{
-                let facInit = layer.teamTwo.loadouts[teamTwoLoadouts[0]].faction.initials;
+                let facInit = layer.teams[1].loadouts[teamTwoLoadouts[0]].faction.initials;
                 teamTwoFlag.src = `img/icons/flag_${facInit}.png`;
             }
 
@@ -114,8 +114,8 @@ function filterLayers(){
         for (const map in maps_dict) {
             try{
                 let layerFactions = []
-                layerFactions = layerFactions.concat( Object.values(layer.teamOne.loadouts).map(l => l.faction.name) )
-                layerFactions = layerFactions.concat( Object.values(layer.teamTwo.loadouts).map(l => l.faction.name) )
+                layerFactions = layerFactions.concat( Object.values(layer.teams[0].loadouts).map(l => l.faction.name) )
+                layerFactions = layerFactions.concat( Object.values(layer.teams[1].loadouts).map(l => l.faction.name) )
 
                 let gameList = Array.from(document.querySelectorAll(`.gamemode-filter > a > span > .dropdown-selected > i`)).map(e=>{return e.getAttribute('data-id')})
                 let nameList = Array.from(document.querySelectorAll(`.faction-filter > a > span > .dropdown-selected`)).map(e=>{return e.innerText})

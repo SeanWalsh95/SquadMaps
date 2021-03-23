@@ -42,8 +42,8 @@ function loadLayerInfo(){
 
 	tOneFacOpt.innerHTML = ""
 	tTwoFacOpt.innerHTML = ""
-	facOptions.teamOne.forEach(option => {tOneFacOpt.appendChild(option)})
-	facOptions.teamTwo.forEach(option => {tTwoFacOpt.appendChild(option)})
+	facOptions[0].forEach(option => {tOneFacOpt.appendChild(option)})
+	facOptions[1].forEach(option => {tTwoFacOpt.appendChild(option)})
 	tOneFacOpt.addEventListener("change", getSelection)
 	tTwoFacOpt.addEventListener("change", getSelection)
 	
@@ -54,8 +54,8 @@ function loadLayerInfo(){
 	
 	tOneLoadOpt.innerHTML = ""
 	tTwoLoadOpt.innerHTML = ""
-	loadOptions.teamOne.forEach(option => {tOneLoadOpt.appendChild(option)})
-	loadOptions.teamTwo.forEach(option => {tTwoLoadOpt.appendChild(option)})
+	loadOptions[0].forEach(option => {tOneLoadOpt.appendChild(option)})
+	loadOptions[1].forEach(option => {tTwoLoadOpt.appendChild(option)})
 	tOneLoadOpt.addEventListener("change", getSelection)
 	tTwoLoadOpt.addEventListener("change", getSelection)
 
@@ -81,8 +81,8 @@ function getSelection(){
 	console.log(`${t1FactionSelection}#${t1LoadoutSelection}`);
 	console.log(`${t2FactionSelection}#${t2LoadoutSelection}`);
 
-	teamOneLoadout = layer.teamOne.loadouts[`${t1FactionSelection}#${t1LoadoutSelection}`] || null
-	teamTwoLoadout = layer.teamTwo.loadouts[`${t2FactionSelection}#${t2LoadoutSelection}`] || null
+	teamOneLoadout = layer.teams[0].loadouts[`${t1FactionSelection}#${t1LoadoutSelection}`] || null
+	teamTwoLoadout = layer.teams[1].loadouts[`${t2FactionSelection}#${t2LoadoutSelection}`] || null
 
 	if(teamOneLoadout && teamTwoLoadout)
 		loadLayerMeta(layer ,teamOneLoadout, teamTwoLoadout)
@@ -93,8 +93,8 @@ function loadLayerMeta(layer, teamOneLoadout, teamTwoLoadout){
 	let t1List = document.getElementById("team_1_vehicles");
 	let t2List = document.getElementById("team_2_vehicles");
 
-	document.getElementById("team_1_tickets").innerHTML = `${layer.teamOne.tickets}`;
-	document.getElementById("team_2_tickets").innerHTML = `${layer.teamTwo.tickets}`;
+	document.getElementById("team_1_tickets").innerHTML = `${layer.teams[0].tickets}`;
+	document.getElementById("team_2_tickets").innerHTML = `${layer.teams[1].tickets}`;
 
 	/*if (layer.commander)
 		document.getElementById("value_commander").innerHTML = "Yes";
