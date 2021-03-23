@@ -133,7 +133,7 @@
 			}
 		}
 
-		const facData = Object.values(factionEnum).map((f)=> { return {selected:true, name:f.name, id:f.initials}})
+		const facData = enumValues(factionEnum).map((f)=> { return {selected:true, name:f.name, id:f.initials}})
     $('.faction-filter').dropdown({
         readOnly: false,
         minCountErrorMessage: '',
@@ -147,7 +147,7 @@
 
     });
 		
-		const gmData = Object.values(gamemodeEnum).map((g)=> { return {selected:true, name:g.name, id:g.abbr}})
+		const gmData = enumValues(gamemodeEnum).map((g)=> { return {selected:true, name:g.name, id:g.abbr}})
     $('.gamemode-filter').dropdown({
         readOnly: false,
         minCountErrorMessage: '',

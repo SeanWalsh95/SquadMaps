@@ -124,6 +124,9 @@ const gamemodeEnum = Object.freeze({
   }
 });
 
+function enumValues(enumContainter){
+    return Object.values(enumContainter).filter(obj=> typeof obj === 'object')
+}
 
 function enumMatch(enumType, search){
   for(const [enumKey, enumObj] of Object.entries(enumType)){
