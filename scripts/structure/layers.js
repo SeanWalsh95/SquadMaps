@@ -8,10 +8,14 @@ class LoadoutContainer{
             this.alliances[a] = []
 
         for (const facData of jsonData){
-            let f = new FactionLoadout(facData)
-            let lookup = `${f.faction.initials}#${f.type}`
-            this.factions[lookup] = f
-            this.alliances[f.faction.alliance].push(lookup)
+            try{
+                let f = new FactionLoadout(facData)
+                let lookup = `${f.faction.initials}#${f.type}`
+                this.factions[lookup] = f
+                this.alliances[f.faction.alliance].push(lookup)
+            }catch (err){
+                console.log(`Error Parsing Loadout for "${ignoreCaseSearch(facData,'faction')} (${ignoreCaseSearch(facData,'setup_Name')})"\n`, err);
+            }
         }
     }
     
@@ -37,7 +41,13 @@ class LoadoutContainer{
 
 class FactionLoadout{
     constructor(jsonData){
-        this.faction = facMatch(ignoreCaseSearch(jsonData,'faction'))
+
+        this.faction = ignoreCaseSearch(jsonData,'faction')
+
+        this.faction = factionEnum.conditionMatch(fEnum => {
+            return Boolean(fEnum.name && fEnum.name.toLowerCase() === this.faction.toLowerCase())
+        }, this.faction);
+
         this.longName = ignoreCaseSearch(jsonData,'setup_Name')
         this.name = ignoreCaseSearch(jsonData,'shortname')
         this.type = ignoreCaseSearch(jsonData,'type')
@@ -120,7 +130,7 @@ class SQLayer{
         this.version =  ignoreCaseSearch(jsonData,'layerVersion') || gmMatch.groups.version || "1"
         this.version = this.version.replace(/[vV]/,'')
 
-        this.gamemode = enumMatch(gamemodeEnum, this.gamemode)
+        this.gamemode = gamemodeEnum.keyMatch(this.gamemode)
     }
 
     genLoadoutOptionElements(){

@@ -13,139 +13,150 @@ var noMatch = [];
 const gitWikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/dev/completed_output/_Current%20Version'
 const cdnWikiURI = 'https://cdn.jsdelivr.net/gh/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data@dev/completed_output/_Current%20Version'
 
+class SQEnum{
 
-const allianceEnum = Object.freeze({
-       __TYPE: "alliance",
+  constructor(type, values){
+
+    this.__TYPE = type
+    Object.assign(this, values);
+
+    Object.freeze(this);
+  }
+
+  values(){
+    return Object.values(this).filter(obj=> typeof obj === 'object')
+  }
+
+  keyMatch(search){
+    for(const [key, obj] of Object.entries(this)){
+      if (search.toLowerCase() === key.toLowerCase())
+        return obj
+    }
+    throw new Error(`"${search}" not found in Enum ${this.__TYPE}`)
+  }
+
+  conditionMatch(condition, search){
+    let matches = Object.values(factionEnum).filter(condition)
+
+    if (matches.length === 1) return matches[0]
+    
+    throw new Error(`"${search}" not found via conditionMatch for Enum ${this.__TYPE}`)
+  }
+
+}
+
+const allianceEnum = new SQEnum(
+  "ALLIANCE",
+  {
        REDFOR: "REDFOR",
       BLUEFOR: "BLUEFOR",
   INDEPENDENT: "INDEPENDENT"
 });
 
-const factionEnum = Object.freeze({
-  __TYPE: "faction",
-   GB: {
-     initials:"GB",
-     name:"British Army",
-     alliance: allianceEnum.BLUEFOR
-  },
-  CAF: {
-    initials:"CAF",
-    name:"Canadian Army",
-    alliance: allianceEnum.BLUEFOR
-  },
-  CIV: {
-    initials:"CIV",
-    name:"Civilians",
-    alliance: allianceEnum.BLUEFOR
-  },
-  INS: {
-    initials:"INS",
-    name:"Insurgent Forces",
-    alliance: allianceEnum.INDEPENDENT
-  },
-  MIL: {
-    initials:"MIL",
-    name:"Irregular Militia Forces",
-    alliance: allianceEnum.INDEPENDENT
-  },
-  MEA: {
-    initials:"MEA",
-    name:"Middle Eastern Alliance",
-    alliance: allianceEnum.INDEPENDENT
-  },
-  RUS: {
-    initials:"RUS",
-    name:"Russian Ground Forces",
-    alliance: allianceEnum.REDFOR
-  },
-  USA: {
-    initials:"USA",
-    name:"United States Army",
-    alliance: allianceEnum.BLUEFOR
-  }
+const factionEnum = new SQEnum(
+  "FACTION",
+  {
+    GB: {
+      initials:"GB",
+      name:"British Army",
+      alliance: allianceEnum.BLUEFOR
+    },
+    CAF: {
+      initials:"CAF",
+      name:"Canadian Army",
+      alliance: allianceEnum.BLUEFOR
+    },
+    CIV: {
+      initials:"CIV",
+      name:"Civilians",
+      alliance: allianceEnum.BLUEFOR
+    },
+    INS: {
+      initials:"INS",
+      name:"Insurgent Forces",
+      alliance: allianceEnum.INDEPENDENT
+    },
+    MIL: {
+      initials:"MIL",
+      name:"Irregular Militia Forces",
+      alliance: allianceEnum.INDEPENDENT
+    },
+    MEA: {
+      initials:"MEA",
+      name:"Middle Eastern Alliance",
+      alliance: allianceEnum.INDEPENDENT
+    },
+    RUS: {
+      initials:"RUS",
+      name:"Russian Ground Forces",
+      alliance: allianceEnum.REDFOR
+    },
+    USA: {
+      initials:"USA",
+      name:"United States Army",
+      alliance: allianceEnum.BLUEFOR
+    }
 });
 
-const gamemodeEnum = Object.freeze({
-  __TYPE: "gamemode",
-  AAS: {
-    value: "AAS",
-    name : "Advance and Secure",
-    abbr: "AAS"
-  } ,
-  Destruction: {
-    value: "Destruction",
-    name : "Destruction",
-    abbr: "DES"
-  },
-  Insurgency: {
-    value: "Insurgency",
-    name : "Insurgency",
-    abbr: "INS"
-  },
-  Invasion: {
-    value: "Invasion",
-    name : "Invasion",
-    abbr: "INV"
-  },
-  RAAS: {
-    value: "RAAS",
-    name : "Advance and Secure (Random)",
-    abbr: "RAAS"
-  },
-  Skirmish: {
-    value: "Skirmish",
-    name : "Skirmish",
-    abbr: "SKMSH"
-  },
-  TA: {
-    value: "TA",
-    name : "Track Attack",
-    abbr: "TA"
-  },
-  Tanks: {
-    value: "Tanks",
-    name : "Tanks",
-    abbr: "Tanks"
-  },
-  TC: {
-    value: "TC",
-    name : "Territory Control",
-    abbr: "TC"
-  },
-  Training:{
-    value: "Training",
-    name : "Training",
-    abbr: "Training"
-  },
-  Tutorial:{
-    value: "Tutorial",
-    name : "Tutorial",
-    abbr: "Tutorial"
-  }
+const gamemodeEnum = new SQEnum(
+  "GAMEMODE",
+  {
+    AAS: {
+      value: "AAS",
+      name : "Advance and Secure",
+      abbr: "AAS"
+    } ,
+    Destruction: {
+      value: "Destruction",
+      name : "Destruction",
+      abbr: "DES"
+    },
+    Insurgency: {
+      value: "Insurgency",
+      name : "Insurgency",
+      abbr: "INS"
+    },
+    Invasion: {
+      value: "Invasion",
+      name : "Invasion",
+      abbr: "INV"
+    },
+    RAAS: {
+      value: "RAAS",
+      name : "Advance and Secure (Random)",
+      abbr: "RAAS"
+    },
+    Skirmish: {
+      value: "Skirmish",
+      name : "Skirmish",
+      abbr: "SKMSH"
+    },
+    TA: {
+      value: "TA",
+      name : "Track Attack",
+      abbr: "TA"
+    },
+    Tanks: {
+      value: "Tanks",
+      name : "Tanks",
+      abbr: "Tanks"
+    },
+    TC: {
+      value: "TC",
+      name : "Territory Control",
+      abbr: "TC"
+    },
+    Training:{
+      value: "Training",
+      name : "Training",
+      abbr: "Training"
+    },
+    Tutorial:{
+      value: "Tutorial",
+      name : "Tutorial",
+      abbr: "Tutorial"
+    }
 });
-
-function enumValues(enumContainter){
-    return Object.values(enumContainter).filter(obj=> typeof obj === 'object')
-}
-
-function enumMatch(enumType, search){
-  for(const [enumKey, enumObj] of Object.entries(enumType)){
-    if (search.toLowerCase() === enumKey.toLowerCase())
-      return enumObj
-  }
-  throw new Error(`Search: ${search} not found in Enum ${enumType.__TYPE}`)
-}
-
-function facMatch(searchStr){
-  for(const facEnum of Object.values(factionEnum)){
-    if(!facEnum.name) continue;
-    if(facEnum.name.toLowerCase().match(searchStr.toLowerCase()))
-      return facEnum
-    if(facEnum.initials === searchStr)
-      return facEnum
-  }
-  throw new Error(`Search: ${searchStr} not found in Enum faction`)
-}
 
 
 const mapNames = {

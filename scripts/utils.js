@@ -9,7 +9,7 @@ function fetchMapData(render=false){
       try{
         layersJson.push(new SQLayer(layerData));
       }catch (err){
-        console.log(`Error Parsing Layer "${ignoreCaseSearch(layerData,'rawName')}"`, err);
+        console.log(`Error Parsing Layer "${ignoreCaseSearch(layerData,'rawName')}"\n`, err);
       }
     }
     parseJsonData();
