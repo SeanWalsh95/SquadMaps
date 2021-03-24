@@ -130,7 +130,6 @@ function filterLayers(){
                     searchMatch = JSON.stringify(layer).toLocaleLowerCase().match(search.toLowerCase())
 
                 if(layer.classname.match(map) && hasFacFilter && hasGameFilter && searchMatch){
-                    layer.map = map
                     maps_dict[map].push(layer.classname);
                 }
             } catch (e) {
