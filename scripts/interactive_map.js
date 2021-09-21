@@ -9,7 +9,7 @@ class SquadMap {
     this.iconSize = [34,17];
 
     this.id = layerData.classname;    
-    this.mapName = layerData.map.name;
+    this.map = layerData.map;
     this.flagDict = this.id in mapLayerFlagData ? mapLayerFlagData[this.id] : null;
     this.tOne = layerData.teams[0];
     this.tTwo = layerData.teams[1];
@@ -17,7 +17,7 @@ class SquadMap {
   }
 
   getImageOverlay(){
-    return L.imageOverlay(`img/maps/raw/${this.mapName.replaceAll(/ /g,'_')}.jpg`, this.bounds); 
+    return L.imageOverlay(`img/maps/raw/${this.map.id}.jpg`, this.bounds); 
   }
 
   createMarkers(altOpacity=0.8){

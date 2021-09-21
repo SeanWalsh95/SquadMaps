@@ -128,7 +128,7 @@ class SQLayer{
         }else if(testUrl(selfImg)){
             this.image = selfImg
         }else{
-            this.image = `img/maps/raw/${this.map.name.replaceAll(/ /g,'_')}.jpg`
+            this.image = `img/maps/raw/${this.map.id}.jpg`
         }
 
         this.thumbnail = `img/maps/thumbnails/${this.classname}.jpg`
