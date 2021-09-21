@@ -58,41 +58,49 @@ const factionEnum = new SQEnum(
   {
     GB: {
       initials:"GB",
+      identifiers: ["GB", "UK"],
       name:"British Army",
       alliance: allianceEnum.BLUEFOR
     },
     CAF: {
       initials:"CAF",
+      identifiers: ["CAF"],
       name:"Canadian Army",
       alliance: allianceEnum.BLUEFOR
     },
     CIV: {
       initials:"CIV",
+      identifiers: ["CIV","Civilian"],
       name:"Civilians",
       alliance: allianceEnum.BLUEFOR
     },
     INS: {
       initials:"INS",
+      identifiers: ["INS", "Insurgent"],
       name:"Insurgent Forces",
       alliance: allianceEnum.INDEPENDENT
     },
     MIL: {
       initials:"MIL",
+      identifiers: ["MIL", "Militia"],
       name:"Irregular Militia Forces",
       alliance: allianceEnum.INDEPENDENT
     },
     MEA: {
       initials:"MEA",
+      identifiers: ["MEA"],
       name:"Middle Eastern Alliance",
       alliance: allianceEnum.INDEPENDENT
     },
     RUS: {
       initials:"RUS",
+      identifiers: ["RUS","RU"],
       name:"Russian Ground Forces",
       alliance: allianceEnum.REDFOR
     },
     USA: {
       initials:"USA",
+      identifiers: ["USA", "US"],
       name:"United States Army",
       alliance: allianceEnum.BLUEFOR
     }
