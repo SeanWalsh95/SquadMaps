@@ -36,7 +36,7 @@ class SQEnum{
   }
 
   conditionMatch(condition, search){
-    let matches = Object.values(factionEnum).filter(condition)
+    let matches = this.values().filter(condition)
 
     if (matches.length === 1) return matches[0]
     
