@@ -27,6 +27,18 @@ class SQEnum{
     return Object.values(this).filter(obj=> typeof obj === 'object')
   }
 
+  keys(){
+    return Object.keys(this).filter(k => k !== "__TYPE")
+  }
+
+  entries(){
+    let entries_list = []
+    for(const key of this.keys()){
+      entries_list.push([key, this[key]])
+    }
+    return entries_list
+  }
+
   keyMatch(search){
     for(const [key, obj] of Object.entries(this)){
       if (search.toLowerCase() === key.toLowerCase())
