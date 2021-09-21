@@ -183,31 +183,99 @@ const gamemodeEnum = new SQEnum(
     }
 });
 
+const mapEnum = new SQEnum(
+  "MAP",
+  {
+    anvil:{
+      search: "anvil",
+      displayname: "Anvil"
+    },
+    albasrah: {
+      search: "albasrah",
+      displayname:"Al Basrah"
+    },
+    belaya: {
+      search: "belaya",
+      displayname:"Belaya"
+    },
+    chora: {
+      search: "chora",
+      displayname:"Chora"
+    },
+    fallujah: {
+      search: "fallujah",
+      displayname:"Fallujah"
+    },
+    fools: {
+      search: "fools",
+      displayname:"Fool's Road"
+    },
+    goosebay: {
+      search: "goosebay",
+      displayname:"Goose Bay"
+    },
+    gorodok: {
+      search: "gorodok",
+      displayname:"Gorodok"
+    },
+    jensen: {
+      search: "jensen",
+      displayname:"Jensen's Range"
+    },
+    kamdesh: {
+      search: "kamdesh",
+      displayname:"Kamdesh"
+    },
+    kohat: {
+      search: "kohat",
+      displayname:"Kohat"
+    },
+    kokan: {
+      search: "kokan",
+      displayname:"Kokan"
+    },
+    lashkar: {
+      search: "lashkar",
+      displayname:"Lashkar Valley"
+    },
+    logar: {
+      search: "logar",
+      displayname:"Logar Vally"
+    },
+    manic: {
+      search: "manic",
+      displayname:"Manic-5"
+    },
+    mestia: {
+      search: "mestia",
+      displayname:"Mestia"
+    },
+    mutaha: {
+      search: "mutaha",
+      displayname:"Mutaha"
+    },
+    narva: {
+      search: "narva",
+      displayname:"Narva"
+    },
+    skorpo: {
+      search: "skorpo",
+      displayname:"Skorpo"
+    },
+    sumari: {
+      search: "sumari",
+      displayname:"Sumari Bala"
+    },
+    tallil: {
+      search: "tallil",
+      displayname:"Tallil"
+    },
+    yehorivka: {
+      search: "yehorivka",
+      displayname:"Yehorivka"
+    }
+});
 
-const mapNames = {
-  "anvil": "Anvil",
-  "albasrah": "Al Basrah",
-  "belaya": "Belaya",
-  "chora": "Chora",
-  "fallujah": "Fallujah",
-  "fools": "Fool's Road",
-  "goosebay": "Goose Bay",
-  "gorodok": "Gorodok",
-  "jensen": "Jensen's Range",
-  "kamdesh": "Kamdesh",
-  "kohat": "Kohat",
-  "kokan": "Kokan",
-  "lashkar": "Lashkar Valley",
-  "logar": "Logar Vally",
-  "manic": "Manic-5",
-  "mestia": "Mestia",
-  "mutaha": "Mutaha",
-  "narva": "Narva",
-  "skorpo": "Skorpo",
-  "sumari": "Sumari Bala",
-  "tallil": "Tallil",
-  "yehorivka": "Yehorivka"
-}
 var maps_dict = {}
-for (const search of Object.keys(mapNames))
+for (const search of mapEnum.keys())
   maps_dict[search] = []

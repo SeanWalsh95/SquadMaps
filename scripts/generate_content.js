@@ -16,7 +16,7 @@ function generateContent(){
 
         var mapHeader = document.createElement('a');
         mapHeader.className = "headers";
-        mapHeader.textContent = mapNames[map];
+        mapHeader.textContent = mapEnum[map].displayname;
         mapHeader.href = `javascript:scrollToId('${htmlMapID}')`;
 
         var headerContainer = document.querySelector('.map-section-links');
@@ -28,7 +28,7 @@ function generateContent(){
         mapSection.id = htmlMapID;
         
         var mapSectionTitle = document.createElement('h2');
-        mapSectionTitle.textContent = mapNames[map];
+        mapSectionTitle.textContent = mapEnum[map].displayname;
 
         mapSection.appendChild(mapSectionTitle);
         

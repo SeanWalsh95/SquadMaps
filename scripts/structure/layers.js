@@ -91,9 +91,9 @@ class SQLayer{
 
         let teams = {0:ignoreCaseSearch(jsonData,'team1'),1:ignoreCaseSearch(jsonData,'team2')}
 
-        for (const [mapSearch, mapDisplayname] of Object.entries(mapNames))
-            if(this.classname.match(mapSearch))
-                this.map = {id: mapSearch, name:mapDisplayname}
+        for (const [mapID, mapObj] of mapEnum.entries())
+            if(this.classname.match(mapObj.search))
+                this.map = {id: mapID, name:mapObj.displayname}
 
         for (const [team, data] of Object.entries(teams)){
             this.teams[team] = {
