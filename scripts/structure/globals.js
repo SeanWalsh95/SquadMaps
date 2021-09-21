@@ -165,6 +165,7 @@ const gamemodeEnum = new SQEnum(
 
 
 const mapNames = {
+  "anvil": "Anvil",
   "albasrah": "Al Basrah",
   "belaya": "Belaya",
   "chora": "Chora",
@@ -183,7 +184,7 @@ const mapNames = {
   "mutaha": "Mutaha",
   "narva": "Narva",
   "skorpo": "Skorpo",
-  "sumari": "Sumari",
+  "sumari": "Sumari Bala",
   "tallil": "Tallil",
   "yehorivka": "Yehorivka"
 }
