@@ -41,14 +41,22 @@ class LoadoutContainer{
 
 class FactionLoadout{
     constructor(jsonData){
+        
+        this.longName = ignoreCaseSearch(jsonData,'setup_Name')
 
         this.faction = ignoreCaseSearch(jsonData,'faction')
+        if (this.faction){
+            this.faction = factionEnum.conditionMatch(fEnum => {
+                return Boolean(fEnum.name && fEnum.name.toLowerCase() === this.faction.toLowerCase())
+            }, this.faction);
+        }else{
+            this.faction = factionEnum.conditionMatch( 
+                faction => faction.identifiers.some(
+                    identifier => this.longName.match(identifier) 
+                ) 
+            );
+        }
 
-        this.faction = factionEnum.conditionMatch(fEnum => {
-            return Boolean(fEnum.name && fEnum.name.toLowerCase() === this.faction.toLowerCase())
-        }, this.faction);
-
-        this.longName = ignoreCaseSearch(jsonData,'setup_Name')
         this.name = ignoreCaseSearch(jsonData,'shortname')
         this.type = ignoreCaseSearch(jsonData,'type')
         this.badge = ignoreCaseSearch(jsonData,'badge')
@@ -96,10 +104,10 @@ class SQLayer{
                 tickets: ignoreCaseSearch(data,'tickets')
             }
 
-            if (this.teams[team].alliances){
+            if (this.teams[team].alliances && this.teams[team].setups){
                 let loadouts = {}
                 for(const alliance of this.teams[team].alliances){
-                    loadouts = Object.assign(factions, factionLoadouts.getFactions(alliance, this.teams[team].setups) )
+                    loadouts = Object.assign(loadouts, factionLoadouts.getFactions(alliance, this.teams[team].setups) )
                 }
                 this.teams[team].loadouts = loadouts
             }else{
