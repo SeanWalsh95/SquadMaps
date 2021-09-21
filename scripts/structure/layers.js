@@ -122,8 +122,14 @@ class SQLayer{
         }
 
         var wikiImg = `${cdnWikiURI}/images/${this.rawName}.jpg`
-        this.image = wikiImg
-        //this.image = `img/maps/raw/${this.map.replaceAll(/ /g,'_')}.jpg`
+        var selfImg = `img/maps/full_size/${this.rawName.toLowerCase()}.jpg`
+        if(testUrl(wikiImg)){
+            this.image = wikiImg
+        }else if(testUrl(selfImg)){
+            this.image = selfImg
+        }else{
+            this.image = `img/maps/raw/${this.map.name.replaceAll(/ /g,'_')}.jpg`
+        }
 
         this.thumbnail = `img/maps/thumbnails/${this.classname}.jpg`
         
