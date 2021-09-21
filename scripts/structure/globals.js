@@ -155,6 +155,11 @@ const gamemodeEnum = new SQEnum(
       value: "Tutorial",
       name : "Tutorial",
       abbr: "Tutorial"
+    },
+    Seed:{
+      value: "Seed",
+      name: "Seed",
+      abbr: "Seed"
     }
 });
 
