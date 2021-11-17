@@ -121,21 +121,16 @@ class SQLayer{
 
         }
 
-        var wikiImg = `${cdnWikiURI}/images/${this.rawName}.jpg`
-        var selfImg = `img/maps/full_size/${this.rawName.toLowerCase()}.jpg`
-        if(testUrl(wikiImg)){
-            this.image = wikiImg
-        }else if(testUrl(selfImg)){
-            this.image = selfImg
-        }else{
+        if(this.classname in layerMeta){
             this.image = `img/maps/raw/${this.map.id}.jpg`
+        }else{
+            this.image = `${cdnImageURI}/full_quality_only_for_download/${this.rawName}.jpg`;
         }
 
         this.thumbnail = `img/maps/thumbnails/${this.classname}.jpg`
-        
 
         this.flagCount = ignoreCaseSearch(jsonData,'CapturePoints')
-        this.flags = this.classname in mapLayerFlagData ? mapLayerFlagData[this.classname] : ignoreCaseSearch(jsonData,'Flags');
+        this.flags = this.classname in layerMeta ? layerMeta[this.classname].flags : ignoreCaseSearch(jsonData,'Flags');
 
         let gmMatch = this.name.match(/(?<gamemode>\w+)(?=(?:$|\s+[vV](?<version>\d+)))/);
 

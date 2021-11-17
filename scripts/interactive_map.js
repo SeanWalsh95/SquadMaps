@@ -10,7 +10,7 @@ class SquadMap {
 
     this.id = layerData.classname;    
     this.map = layerData.map;
-    this.flagDict = this.id in mapLayerFlagData ? mapLayerFlagData[this.id] : null;
+    this.flagDict = this.id in layerMeta ? layerMeta[this.id].flags : null;
     this.tOne = layerData.teams[0];
     this.tTwo = layerData.teams[1];
     this.gamemode = layerData.gamemode.value;
@@ -62,7 +62,7 @@ function changeMap(layer){
 
 	let tmpPointList = {};
 
-  if(layer.classname in mapLayerFlagData){
+  if(layer.classname in layerMeta){
 
     layerDriver = new SquadMap(layer);
 
@@ -72,26 +72,26 @@ function changeMap(layer){
     var markerGroup = layerDriver.createMarkers();
     markerGroup.addTo(map);    
 
-    if(layer.classname in mapBorderPolygons){
+    var layer_border = layerMeta[layer.classname].border
+    if(layer_border.length){
       let polyPoints = [];
 
       let a = layerDriver.bounds[0];
       let b = layerDriver.bounds[1];
       let outerBounds = [ a, [a[0],b[1]], b, [b[0],a[1]] ];
 
-      let polygonHole = mapBorderPolygons[layer.classname];
-
       //add inner polygon to group for fitBounds sizing 
-      markerGroup.addLayer(L.polygon(polygonHole, {opacity:0.0, fillOpacity:0.0}));
+      markerGroup.addLayer(L.polygon(layer_border, {opacity:0.0, fillOpacity:0.0}));
 
       console.log(outerBounds)
       polyPoints.push(outerBounds);
-      polyPoints.push(polygonHole);
+      polyPoints.push(layer_border);
       let mapBorder = L.polygon(polyPoints, {color:"white", opacity:0.2, fillColor:"black", fillOpacity:0.7});
       mapBorder.addTo(map);
     }
 
     if(!['RAAS'].includes(layer.gamemode.value)){
+      layerDriver.createLine({color:'#FFFFFF', weight: 5, opacity:0.85}).addTo(map);
       layerDriver.createLine({color:'#585858', weight: 3, opacity:0.85}).addTo(map);
       map.fitBounds(markerGroup.getBounds(), {padding:[25,25]});
     }
