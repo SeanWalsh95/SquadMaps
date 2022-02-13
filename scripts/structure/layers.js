@@ -1,20 +1,20 @@
 
 class LoadoutContainer{
-    constructor(jsonData){
+    constructor(setupData){
 
         this.factions = {}
         this.alliances = {}
         for (const a of Object.values(allianceEnum))
             this.alliances[a] = []
 
-        for (const facData of jsonData){
+        for (const [i, facData] of setupData.entries()){
             try{
                 let f = new FactionLoadout(facData)
                 let lookup = `${f.faction.initials}#${f.type}`
                 this.factions[lookup] = f
                 this.alliances[f.faction.alliance].push(lookup)
             }catch (err){
-                console.log(`Error Parsing Loadout for "${ignoreCaseSearch(facData,'faction')} (${ignoreCaseSearch(facData,'setup_Name')})"\n`, err);
+                console.log(`Error Parsing Setup ${i} for "${ignoreCaseSearch(facData,'faction')} (${ignoreCaseSearch(facData,'setup_Name')})"\n`, err);
             }
         }
     }
@@ -42,7 +42,7 @@ class LoadoutContainer{
 class FactionLoadout{
     constructor(jsonData){
         
-        this.longName = ignoreCaseSearch(jsonData,'setup_Name')
+        this.setupName = ignoreCaseSearch(jsonData,'setup_Name')
 
         this.faction = ignoreCaseSearch(jsonData,'faction')
         if (this.faction){
@@ -52,7 +52,7 @@ class FactionLoadout{
         }else{
             this.faction = factionEnum.conditionMatch( 
                 faction => faction.identifiers.some(
-                    identifier => this.longName.match(identifier) 
+                    identifier => this.setupName.match(identifier) 
                 ) 
             );
         }
@@ -78,7 +78,10 @@ class FactionLoadout{
 }
 
 class SQLayer{
-    constructor(jsonData){
+    constructor(layerIndex, jsonData){
+
+        this.index = layerIndex
+
         this.name = ignoreCaseSearch(jsonData,'name')
 
         this.rawName = ignoreCaseSearch(jsonData,'rawName')
@@ -127,7 +130,7 @@ class SQLayer{
             this.image = `${cdnImageURI}/full_quality_only_for_download/${this.rawName}.jpg`;
         }
 
-        this.thumbnail = `img/maps/thumbnails/${this.classname}.jpg`
+        this.thumbnail = `${cdnImageURI}/main/${this.rawName}.jpg`
 
         this.flagCount = ignoreCaseSearch(jsonData,'CapturePoints')
         this.flags = this.classname in layerMeta ? layerMeta[this.classname].flags : ignoreCaseSearch(jsonData,'Flags');
