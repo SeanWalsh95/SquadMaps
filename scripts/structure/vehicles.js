@@ -35,7 +35,7 @@ const vehicleWikiDict = {
 
 const vehicleVerboseWords = [
 ['Truck',''],
-['Logistics',''],
+['Logistics','Logi.'],
 ['Technical','Tec.'],
 ['Open Top',''],
 ['Transport',''],
