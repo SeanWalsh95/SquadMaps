@@ -70,7 +70,7 @@ const factionEnum = new SQEnum(
   {
     GB: {
       initials:"GB",
-      identifiers: ["GB", "UK"],
+      identifiers: ["GB", "UK", "British"],
       name:"British Army",
       alliance: allianceEnum.BLUEFOR
     },
