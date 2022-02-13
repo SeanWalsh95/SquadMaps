@@ -4,10 +4,10 @@ function fetchMapData(render=false){
   $.getJSON(`${gitWikiDataURI}`).then( (data)=>{
     factionLoadouts = new LoadoutContainer(data['Setups'])
     layersJson = []
-    for (const layerData of data['Maps']){
+    for (const [layerIndex, layerData] of data['Maps'].entries()){
       layerObj = null;
       try{
-        layersJson.push(new SQLayer(layerData));
+        layersJson.push(new SQLayer(layerIndex, layerData));
       }catch (err){
         console.log(`Error Parsing Layer "${ignoreCaseSearch(layerData,'rawName')}"\n`, err);
       }
