@@ -1,7 +1,7 @@
 
 
 function fetchMapData(render=false){
-  $.getJSON(`${gitWikiURI}/finished.json`).then( (data)=>{
+  $.getJSON(`${gitWikiDataURI}`).then( (data)=>{
     factionLoadouts = new LoadoutContainer(data['Setups'])
     layersJson = []
     for (const layerData of data['Maps']){

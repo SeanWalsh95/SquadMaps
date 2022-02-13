@@ -10,7 +10,7 @@ var layerDict = {};
 
 var noMatch = [];
 
-const gitWikiURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/dev/completed_output/_Current%20Version'
+const gitWikiDataURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/master/completed_output/_Current%20Version/finished.json'
 const cdnImageURI = 'https://squad-data.nyc3.cdn.digitaloceanspaces.com'
 
 class SQEnum{
