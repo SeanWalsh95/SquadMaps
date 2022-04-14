@@ -71,7 +71,7 @@ const factionEnum = new SQEnum(
     AUS: {
       initials:"AUS",
       identifiers: ["AUS", "Australian"],
-      name:"Australian Army",
+      name:"Australian Defence Force",
       alliance: allianceEnum.BLUEFOR
     },
     GB: {
