@@ -53,11 +53,8 @@ const vehicleVerboseWords = [
 
 class SQVehicle {
   constructor(jsonData){
-      this.name = ignoreCaseSearch(jsonData,'type');
-      this.classname =  ignoreCaseSearch(jsonData,'rawType');
-
-      if (this.classname.includes('Cage'))
-        this.name = `${this.name} Cage`
+      this.name = ignoreCaseSearch(jsonData,'displayName');
+      this.classname =  ignoreCaseSearch(jsonData,'rawName');
 
       this.quantity = parseInt(ignoreCaseSearch(jsonData,'count')) || 1;
       this.delay = ignoreCaseSearch(jsonData,'delay') || 0;

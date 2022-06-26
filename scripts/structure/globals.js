@@ -10,7 +10,8 @@ var layerDict = {};
 
 var noMatch = [];
 
-const gitWikiDataURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/master/completed_output/_Current%20Version/finished.json'
+// const gitWikiDataURI = 'https://raw.githubusercontent.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data/master/completed_output/_Current%20Version/finished.json'
+const gitWikiDataURI = 'https://raw.githubusercontent.com/Shanomac99/SquadJSON/main/mapData/current/maps.json'
 const cdnImageURI = 'https://squad-data.nyc3.cdn.digitaloceanspaces.com'
 
 class SQEnum{
@@ -121,6 +122,12 @@ const factionEnum = new SQEnum(
       identifiers: ["USA", "US"],
       name:"United States Army",
       alliance: allianceEnum.BLUEFOR
+    },
+    USMC: {
+      initials:"USMC",
+      identifiers: ["USMC"],
+      name:"United States Marine Corps",
+      alliance: allianceEnum.BLUEFOR
     }
 });
 
@@ -158,7 +165,7 @@ const gamemodeEnum = new SQEnum(
       abbr: "SKMSH"
     },
     TA: {
-      value: "TA",
+      value: "Track Attack",
       name : "Track Attack",
       abbr: "TA"
     },
@@ -168,7 +175,7 @@ const gamemodeEnum = new SQEnum(
       abbr: "Tanks"
     },
     TC: {
-      value: "TC",
+      value: "Territory Control",
       name : "Territory Control",
       abbr: "TC"
     },
@@ -203,6 +210,10 @@ const mapEnum = new SQEnum(
     belaya: {
       search: "belaya",
       displayname:"Belaya"
+    },
+    blackcoast: {
+      search: "blackcoast",
+      displayname:"Black Coast"
     },
     chora: {
       search: "chora",

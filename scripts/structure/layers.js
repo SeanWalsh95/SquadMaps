@@ -84,15 +84,16 @@ class SQLayer{
 
         this.name = ignoreCaseSearch(jsonData,'name')
 
-        this.rawName = ignoreCaseSearch(jsonData,'rawName')
+        this.rawName = jsonData.info.layerId
 
-        this.classname = this.rawName.toLowerCase()
+        this.classname = layerIndex.toLowerCase()
 
-        this.lighting = jsonData.lighting
+        this.lighting = jsonData.lighting || "Unknown"
 
         this.teams = [{},{}];
 
-        let teams = {0:ignoreCaseSearch(jsonData,'team1'),1:ignoreCaseSearch(jsonData,'team2')}
+            
+        let teams = {0:jsonData.teamInfo.team1,1:jsonData.teamInfo.team2}
 
         for (const [mapID, mapObj] of mapEnum.entries())
             if(this.classname.match(mapObj.search))
@@ -100,7 +101,7 @@ class SQLayer{
 
         for (const [team, data] of Object.entries(teams)){
             this.teams[team] = {
-                alliances: ignoreCaseSearch(data,'allowedAlliances'),
+                // alliances: ignoreCaseSearch(data,'allowedAlliances'),
                 setups: ignoreCaseSearch(data,'factionSetups'),
                 intel: ignoreCaseSearch(data,'intelOnEnemy'),
                 actions: ignoreCaseSearch(data,'actions'),
@@ -135,13 +136,11 @@ class SQLayer{
         this.flagCount = ignoreCaseSearch(jsonData,'CapturePoints')
         this.flags = this.classname in layerMeta ? layerMeta[this.classname].flags : ignoreCaseSearch(jsonData,'Flags');
 
-        let gmMatch = this.name.match(/(?<gamemode>\w+)(?=(?:$|\s+[vV](?<version>\d+)))/);
-
-        this.gamemode = ignoreCaseSearch(jsonData,'gamemode') || gmMatch.groups.gamemode || "Unknown"
-        this.version =  ignoreCaseSearch(jsonData,'layerVersion') || gmMatch.groups.version || "1"
+        this.gamemode = jsonData.info.gamemode || "Unknown"
+        this.version = jsonData.info.layerVersion || "1"
         this.version = this.version.replace(/[vV]/,'')
 
-        this.gamemode = gamemodeEnum.keyMatch(this.gamemode)
+        this.gamemode = gamemodeEnum.conditionMatch(gm => gm.value === this.gamemode, this.gamemode);
     }
 
     genLoadoutOptionElements(){

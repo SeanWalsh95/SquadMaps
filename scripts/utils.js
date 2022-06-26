@@ -2,14 +2,14 @@
 
 function fetchMapData(render=false){
   $.getJSON(`${gitWikiDataURI}`).then( (data)=>{
-    factionLoadouts = new LoadoutContainer(data['Setups'])
+    // factionLoadouts = new LoadoutContainer(data['Setups'])
     layersJson = []
-    for (const [layerIndex, layerData] of data['Maps'].entries()){
+    for (const [layerId, layerData] of  Object.entries(data)){
       layerObj = null;
       try{
-        layersJson.push(new SQLayer(layerIndex, layerData));
+        layersJson.push(new SQLayer(layerId, layerData));
       }catch (err){
-        console.log(`Error Parsing Layer "${ignoreCaseSearch(layerData,'rawName')}"\n`, err);
+        console.log(`Error Parsing Layer "${layerId}"\n`, err);
       }
     }
     parseJsonData();
